@@ -3,15 +3,10 @@
 //////////////////////////////////////////////////////////
 
 #import <Flutter/Flutter.h>
-#import <MAMapKit/MAMapKit.h>
-#import "MAPinAnnotationViewFactory.h"
-#import "MAAnnotationViewFactory.h"
-#import "MACustomCalloutViewFactory.h"
-#import "MAMapViewFactory.h"
 
 typedef void (^Handler)(NSObject <FlutterPluginRegistrar> *, id, FlutterResult);
 
-@interface AmapMapFluttifyPlugin : NSObject<MATraceDelegate, MAMultiPointOverlayRendererDelegate, MAMapViewDelegate, FlutterPlugin>
+@interface AmapMapFluttifyPlugin : NSObject<FlutterPlugin>
 
 - (instancetype) initWithFlutterPluginRegistrar: (NSObject <FlutterPluginRegistrar> *) registrar;
 

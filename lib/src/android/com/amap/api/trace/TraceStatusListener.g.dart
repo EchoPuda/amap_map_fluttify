@@ -11,12 +11,49 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _com_amap_api_trace_TraceStatusListener_SUB extends java_lang_Object with com_amap_api_trace_TraceStatusListener {}
 
 mixin com_amap_api_trace_TraceStatusListener on java_lang_Object {
   
 
+  static com_amap_api_trace_TraceStatusListener subInstance() => _com_amap_api_trace_TraceStatusListener_SUB();
+
+  static Future<com_amap_api_trace_TraceStatusListener> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceStatusListener::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyAndroidAs<com_amap_api_trace_TraceStatusListener>(__result__)!;
+  
+    // handle callback
+    MethodChannel('com.amap.api.trace.TraceStatusListener::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'onTraceStatus__':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onTraceStatus?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}, \'var3\':${args['var3']}])');
+                }
+            
+                // handle the native call
+                __object__.onTraceStatus?.call((args['var1'] as List? ?? []).map((it) => AmapMapFluttifyAndroidAs<com_amap_api_trace_TraceLocation>(it)).where((e) => e != null).cast<com_amap_api_trace_TraceLocation>().toList(), (args['var2'] as List? ?? []).map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_LatLng>(it)).where((e) => e != null).cast<com_amap_api_maps_model_LatLng>().toList(), args['var3']);
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,8 +63,7 @@ mixin com_amap_api_trace_TraceStatusListener on java_lang_Object {
 
   
 
-  @mustCallSuper
-  Future<void> onTraceStatus(List<com_amap_api_trace_TraceLocation> var1, List<com_amap_api_maps_model_LatLng> var2, String var3) {}
+  Future<void> Function(List<com_amap_api_trace_TraceLocation>? var1, List<com_amap_api_maps_model_LatLng>? var2, String? var3)? onTraceStatus;
   
 }
 

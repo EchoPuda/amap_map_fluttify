@@ -11,12 +11,49 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _com_amap_api_maps_AMap_OnMapLongClickListener_SUB extends java_lang_Object with com_amap_api_maps_AMap_OnMapLongClickListener {}
 
 mixin com_amap_api_maps_AMap_OnMapLongClickListener on java_lang_Object {
   
 
+  static com_amap_api_maps_AMap_OnMapLongClickListener subInstance() => _com_amap_api_maps_AMap_OnMapLongClickListener_SUB();
+
+  static Future<com_amap_api_maps_AMap_OnMapLongClickListener> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.AMap.OnMapLongClickListener::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyAndroidAs<com_amap_api_maps_AMap_OnMapLongClickListener>(__result__)!;
+  
+    // handle callback
+    MethodChannel('com.amap.api.maps.AMap.OnMapLongClickListener::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'onMapLongClick':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onMapLongClick?.call([\'var1\':${args['var1']}])');
+                }
+            
+                // handle the native call
+                __object__.onMapLongClick?.call(AmapMapFluttifyAndroidAs<com_amap_api_maps_model_LatLng>(args['var1']));
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,8 +63,7 @@ mixin com_amap_api_maps_AMap_OnMapLongClickListener on java_lang_Object {
 
   
 
-  @mustCallSuper
-  Future<void> onMapLongClick(com_amap_api_maps_model_LatLng var1) {}
+  Future<void> Function(com_amap_api_maps_model_LatLng? var1)? onMapLongClick;
   
 }
 

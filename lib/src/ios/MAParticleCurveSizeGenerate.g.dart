@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class MAParticleCurveSizeGenerate extends NSObject with MAParticleSizeGenerate {
   //region constants
@@ -24,19 +27,24 @@ class MAParticleCurveSizeGenerate extends NSObject with MAParticleSizeGenerate {
 
   //region creators
   static Future<MAParticleCurveSizeGenerate> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAParticleCurveSizeGenerate', {'init': init});
-    final object = MAParticleCurveSizeGenerate()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAParticleCurveSizeGenerate',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAParticleCurveSizeGenerate>(__result__)!;
   }
   
   static Future<List<MAParticleCurveSizeGenerate>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAParticleCurveSizeGenerate', {'length': length, 'init': init});
-  
-    final List<MAParticleCurveSizeGenerate> typedResult = resultBatch.map((result) => MAParticleCurveSizeGenerate()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAParticleCurveSizeGenerate',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAParticleCurveSizeGenerate>(it))
+        .where((element) => element !=null)
+        .cast<MAParticleCurveSizeGenerate>()
+        .toList() ?? <MAParticleCurveSizeGenerate>[];
   }
   
   //endregion
@@ -51,26 +59,20 @@ class MAParticleCurveSizeGenerate extends NSObject with MAParticleSizeGenerate {
 
   //region methods
   
-  Future<MAParticleCurveSizeGenerate> initWithCurveX_Y_Z(double x, double y, double z) async {
+  Future<MAParticleCurveSizeGenerate?> initWithCurveX_Y_Z(double? x, double? y, double? z) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAParticleCurveSizeGenerate@$refId::initWithCurveX([\'x\':$x, \'y\':$y, \'z\':$z])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleCurveSizeGenerate::initWithCurveX_Y_Z', {"x": x, "y": y, "z": z, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAParticleCurveSizeGenerate::initWithCurveX_Y_Z', {"x": x, "y": y, "z": z, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = MAParticleCurveSizeGenerate()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<MAParticleCurveSizeGenerate>(__result__);
   }
   
   //endregion
@@ -81,7 +83,12 @@ class MAParticleCurveSizeGenerate extends NSObject with MAParticleSizeGenerate {
   }
 }
 
-extension MAParticleCurveSizeGenerate_Batch on List<MAParticleCurveSizeGenerate> {
+extension MAParticleCurveSizeGenerate_Batch on List<MAParticleCurveSizeGenerate?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
@@ -92,22 +99,14 @@ extension MAParticleCurveSizeGenerate_Batch on List<MAParticleCurveSizeGenerate>
 
   //region methods
   
-  Future<List<MAParticleCurveSizeGenerate>> initWithCurveX_Y_Z_batch(List<double> x, List<double> y, List<double> z) async {
-    if (x.length != y.length || y.length != z.length) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<MAParticleCurveSizeGenerate?>> initWithCurveX_Y_Z_batch(List<double?> x, List<double?> y, List<double?> z) async {
+    assert(x.length == y.length && y.length == z.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleCurveSizeGenerate::initWithCurveX_Y_Z_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"x": x[__i__], "y": y[__i__], "z": z[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAParticleCurveSizeGenerate::initWithCurveX_Y_Z_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"x": x[__i__], "y": y[__i__], "z": z[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAParticleCurveSizeGenerate()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAParticleCurveSizeGenerate>(__result__)).cast<MAParticleCurveSizeGenerate?>().toList();
   }
   
   //endregion

@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_model_MyTrafficStyle extends java_lang_Object  {
   //region constants
@@ -24,19 +27,24 @@ class com_amap_api_maps_model_MyTrafficStyle extends java_lang_Object  {
 
   //region creators
   static Future<com_amap_api_maps_model_MyTrafficStyle> create__() async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_model_MyTrafficStyle__', );
-    final object = com_amap_api_maps_model_MyTrafficStyle()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_MyTrafficStyle__',
+    
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MyTrafficStyle>(__result__)!;
   }
   
   static Future<List<com_amap_api_maps_model_MyTrafficStyle>> create_batch__(int length) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_model_MyTrafficStyle__', {'length': length});
-  
-    final List<com_amap_api_maps_model_MyTrafficStyle> typedResult = resultBatch.map((result) => com_amap_api_maps_model_MyTrafficStyle()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_MyTrafficStyle__',
+      {'length': length}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MyTrafficStyle>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_MyTrafficStyle>()
+        .toList() ?? <com_amap_api_maps_model_MyTrafficStyle>[];
   }
   
   //endregion
@@ -51,279 +59,207 @@ class com_amap_api_maps_model_MyTrafficStyle extends java_lang_Object  {
 
   //region methods
   
-  Future<int> getSmoothColor() async {
+  Future<int?> getSmoothColor() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::getSmoothColor([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSmoothColor', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSmoothColor', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setSmoothColor(int var1) async {
+  Future<void> setSmoothColor(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::setSmoothColor([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSmoothColor', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSmoothColor', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getSlowColor() async {
+  Future<int?> getSlowColor() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::getSlowColor([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSlowColor', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSlowColor', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setSlowColor(int var1) async {
+  Future<void> setSlowColor(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::setSlowColor([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSlowColor', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSlowColor', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getCongestedColor() async {
+  Future<int?> getCongestedColor() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::getCongestedColor([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getCongestedColor', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getCongestedColor', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setCongestedColor(int var1) async {
+  Future<void> setCongestedColor(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::setCongestedColor([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setCongestedColor', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setCongestedColor', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getSeriousCongestedColor() async {
+  Future<int?> getSeriousCongestedColor() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::getSeriousCongestedColor([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSeriousCongestedColor', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSeriousCongestedColor', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setSeriousCongestedColor(int var1) async {
+  Future<void> setSeriousCongestedColor(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::setSeriousCongestedColor([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSeriousCongestedColor', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSeriousCongestedColor', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<double> getRatio() async {
+  Future<double?> getRatio() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::getRatio([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getRatio', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getRatio', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setRatio(double var1) async {
+  Future<void> setRatio(double? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::setRatio([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setRatio', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setRatio', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getTrafficRoadBackgroundColor() async {
+  Future<int?> getTrafficRoadBackgroundColor() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::getTrafficRoadBackgroundColor([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getTrafficRoadBackgroundColor', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getTrafficRoadBackgroundColor', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setTrafficRoadBackgroundColor(int var1) async {
+  Future<void> setTrafficRoadBackgroundColor(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MyTrafficStyle@$refId::setTrafficRoadBackgroundColor([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setTrafficRoadBackgroundColor', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setTrafficRoadBackgroundColor', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   //endregion
@@ -334,7 +270,12 @@ class com_amap_api_maps_model_MyTrafficStyle extends java_lang_Object  {
   }
 }
 
-extension com_amap_api_maps_model_MyTrafficStyle_Batch on List<com_amap_api_maps_model_MyTrafficStyle> {
+extension com_amap_api_maps_model_MyTrafficStyle_Batch on List<com_amap_api_maps_model_MyTrafficStyle?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
@@ -345,231 +286,135 @@ extension com_amap_api_maps_model_MyTrafficStyle_Batch on List<com_amap_api_maps
 
   //region methods
   
-  Future<List<int>> getSmoothColor_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getSmoothColor_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSmoothColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSmoothColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setSmoothColor_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setSmoothColor_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSmoothColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSmoothColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getSlowColor_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getSlowColor_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSlowColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSlowColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setSlowColor_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setSlowColor_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSlowColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSlowColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getCongestedColor_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getCongestedColor_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getCongestedColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getCongestedColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setCongestedColor_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setCongestedColor_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setCongestedColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setCongestedColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getSeriousCongestedColor_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getSeriousCongestedColor_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSeriousCongestedColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getSeriousCongestedColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setSeriousCongestedColor_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setSeriousCongestedColor_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSeriousCongestedColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setSeriousCongestedColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<double>> getRatio_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<double?>> getRatio_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getRatio_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getRatio_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
   
-  Future<List<void>> setRatio_batch(List<double> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setRatio_batch(List<double?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setRatio_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setRatio_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getTrafficRoadBackgroundColor_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getTrafficRoadBackgroundColor_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getTrafficRoadBackgroundColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::getTrafficRoadBackgroundColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setTrafficRoadBackgroundColor_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setTrafficRoadBackgroundColor_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setTrafficRoadBackgroundColor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MyTrafficStyle::setTrafficRoadBackgroundColor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   //endregion

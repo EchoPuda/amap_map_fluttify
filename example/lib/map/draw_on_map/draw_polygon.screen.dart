@@ -14,7 +14,7 @@ class DrawPolygonScreen extends StatefulWidget {
 
 class _DrawPolygonScreenState extends State<DrawPolygonScreen> with NextLatLng {
   AmapController _controller;
-  List<Polygon> _polygonList = [];
+  List<IPolygon> _polygonList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,7 @@ class _DrawPolygonScreenState extends State<DrawPolygonScreen> with NextLatLng {
           Flexible(
             flex: 1,
             child: AmapView(
+              zoomLevel: 10,
               onMapCreated: (controller) async {
                 _controller = controller;
               },
@@ -32,13 +33,13 @@ class _DrawPolygonScreenState extends State<DrawPolygonScreen> with NextLatLng {
           ),
           Flexible(
             child: DecoratedColumn(
-              divider: kDividerTiny,
+              divider: Divider(height: 1),
               children: <Widget>[
                 ListTile(
                   title: Center(child: Text('添加多边形')),
                   onTap: () async {
                     final polygon = await _controller?.addPolygon(PolygonOption(
-                      latLngList: [
+                      coordinateList: [
                         LatLng(39.999391, 116.135972),
                         LatLng(39.898323, 116.057694),
                         LatLng(39.900430, 116.265061),
@@ -46,6 +47,51 @@ class _DrawPolygonScreenState extends State<DrawPolygonScreen> with NextLatLng {
                       ],
                       width: 10,
                       strokeColor: Colors.green,
+                    ));
+                    _polygonList.add(polygon);
+                  },
+                ),
+                ListTile(
+                  title: Center(child: Text('添加虚线折线')),
+                  onTap: () async {
+                    final polyline =
+                        await _controller?.addPolyline(PolylineOption(
+                      coordinateList: [
+                        LatLng(39.999391, 116.135972),
+                        LatLng(39.898323, 116.057694),
+                        LatLng(39.900430, 116.265061),
+                        LatLng(39.955192, 116.140092),
+                        LatLng(39.999391, 116.135972),
+                      ],
+                      width: 10,
+                      dashType: DashType.Square,
+                    ));
+                  },
+                ),
+                ListTile(
+                  title: Center(child: Text('添加虚线填充多边形')),
+                  onTap: () async {
+                    await _controller?.addPolyline(PolylineOption(
+                      coordinateList: [
+                        LatLng(39.999391, 116.135972),
+                        LatLng(39.898323, 116.057694),
+                        LatLng(39.900430, 116.265061),
+                        LatLng(39.955192, 116.140092),
+                        LatLng(39.999391, 116.135972),
+                      ],
+                      width: 10,
+                      strokeColor: Colors.blue,
+                      dashType: DashType.Square,
+                    ));
+                    final polygon = await _controller?.addPolygon(PolygonOption(
+                      coordinateList: [
+                        LatLng(39.999391, 116.135972),
+                        LatLng(39.898323, 116.057694),
+                        LatLng(39.900430, 116.265061),
+                        LatLng(39.955192, 116.140092),
+                      ],
+                      fillColor: Colors.blue.withOpacity(0.3),
+                      strokeColor: Colors.transparent,
                     ));
                     _polygonList.add(polygon);
                   },

@@ -22,10 +22,10 @@ class CalculateDistanceStateScreen extends State<CalculateDistanceScreen> {
         title: Text('距离计算'),
       ),
       body: DecoratedColumn(
-        padding: EdgeInsets.all(kSpaceBig),
+        padding: EdgeInsets.all(kSpace16),
         children: <Widget>[
           DecoratedRow(
-            itemSpacing: kSpaceNormal,
+            itemSpacing: kSpace8,
             children: <Widget>[
               Text('点1:'),
               Flexible(
@@ -45,7 +45,7 @@ class CalculateDistanceStateScreen extends State<CalculateDistanceScreen> {
             ],
           ),
           DecoratedRow(
-            itemSpacing: kSpaceNormal,
+            itemSpacing: kSpace8,
             children: <Widget>[
               Text('点2:'),
               Flexible(

@@ -65,6 +65,8 @@ public class AmapMapFluttifyPlugin implements FlutterPlugin, MethodChannel.Metho
         handlerMapList.add(SubHandler11.getSubHandler(messenger));
         handlerMapList.add(SubHandler12.getSubHandler(messenger));
         handlerMapList.add(SubHandler13.getSubHandler(messenger));
+        handlerMapList.add(SubHandler14.getSubHandler(messenger));
+        handlerMapList.add(SubHandler15.getSubHandler(messenger));
         handlerMapList.add(SubHandlerCustom.instance.getSubHandler(messenger, registrar.activity()));
 
         channel.setMethodCallHandler(plugin);
@@ -106,6 +108,8 @@ public class AmapMapFluttifyPlugin implements FlutterPlugin, MethodChannel.Metho
         handlerMapList.add(SubHandler11.getSubHandler(messenger));
         handlerMapList.add(SubHandler12.getSubHandler(messenger));
         handlerMapList.add(SubHandler13.getSubHandler(messenger));
+        handlerMapList.add(SubHandler14.getSubHandler(messenger));
+        handlerMapList.add(SubHandler15.getSubHandler(messenger));
 
         channel.setMethodCallHandler(this);
     }

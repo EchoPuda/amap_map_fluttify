@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_trace_TraceOverlay extends java_lang_Object  {
   //region constants
@@ -26,36 +29,46 @@ class com_amap_api_trace_TraceOverlay extends java_lang_Object  {
   //endregion
 
   //region creators
-  static Future<com_amap_api_trace_TraceOverlay> create__com_amap_api_maps_AMap__List_java_util_List_com_amap_api_maps_model_LatLng__(com_amap_api_maps_AMap var1, List<com_amap_api_maps_model_LatLng> var2) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap__java_util_List_com_amap_api_maps_model_LatLng_', {"var1": var1, "var2": var2});
-    final object = com_amap_api_trace_TraceOverlay()..refId = refId;
-    return object;
+  static Future<com_amap_api_trace_TraceOverlay> create__com_amap_api_maps_AMap__List_java_util_List_com_amap_api_maps_model_LatLng__(com_amap_api_maps_AMap? var1, List<com_amap_api_maps_model_LatLng>? var2) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap__java_util_List_com_amap_api_maps_model_LatLng_',
+      {"var1": var1, "var2": var2}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_trace_TraceOverlay>(__result__)!;
   }
   
-  static Future<com_amap_api_trace_TraceOverlay> create__com_amap_api_maps_AMap(com_amap_api_maps_AMap var1) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap', {"var1": var1});
-    final object = com_amap_api_trace_TraceOverlay()..refId = refId;
-    return object;
+  static Future<com_amap_api_trace_TraceOverlay> create__com_amap_api_maps_AMap(com_amap_api_maps_AMap? var1) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap',
+      {"var1": var1}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_trace_TraceOverlay>(__result__)!;
   }
   
-  static Future<List<com_amap_api_trace_TraceOverlay>> create_batch__com_amap_api_maps_AMap__List_java_util_List_com_amap_api_maps_model_LatLng__(List<com_amap_api_maps_AMap> var1, List<List<com_amap_api_maps_model_LatLng>> var2) async {
-    if (var1.length != var2.length) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap__java_util_List_com_amap_api_maps_model_LatLng_', [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__]}]);
-  
-    final List<com_amap_api_trace_TraceOverlay> typedResult = resultBatch.map((result) => com_amap_api_trace_TraceOverlay()..refId = result).toList();
-    return typedResult;
+  static Future<List<com_amap_api_trace_TraceOverlay>> create_batch__com_amap_api_maps_AMap__List_java_util_List_com_amap_api_maps_model_LatLng__(List<com_amap_api_maps_AMap?> var1, List<List<com_amap_api_maps_model_LatLng>?> var2) async {
+    assert(var1.length == var2.length);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap__java_util_List_com_amap_api_maps_model_LatLng_',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_trace_TraceOverlay>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_trace_TraceOverlay>()
+        .toList() ?? <com_amap_api_trace_TraceOverlay>[];
   }
   
-  static Future<List<com_amap_api_trace_TraceOverlay>> create_batch__com_amap_api_maps_AMap(List<com_amap_api_maps_AMap> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap', [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__]}]);
-  
-    final List<com_amap_api_trace_TraceOverlay> typedResult = resultBatch.map((result) => com_amap_api_trace_TraceOverlay()..refId = result).toList();
-    return typedResult;
+  static Future<List<com_amap_api_trace_TraceOverlay>> create_batch__com_amap_api_maps_AMap(List<com_amap_api_maps_AMap?> var1) async {
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_trace_TraceOverlay__com_amap_api_maps_AMap',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_trace_TraceOverlay>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_trace_TraceOverlay>()
+        .toList() ?? <com_amap_api_trace_TraceOverlay>[];
   }
   
   //endregion
@@ -70,26 +83,20 @@ class com_amap_api_trace_TraceOverlay extends java_lang_Object  {
 
   //region methods
   
-  Future<void> add(List<com_amap_api_maps_model_LatLng> var1) async {
+  Future<void> add(List<com_amap_api_maps_model_LatLng>? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::add([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::add', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::add', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
@@ -100,42 +107,30 @@ class com_amap_api_trace_TraceOverlay extends java_lang_Object  {
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::remove', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::remove', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setProperCamera(List<com_amap_api_maps_model_LatLng> var1) async {
+  Future<void> setProperCamera(List<com_amap_api_maps_model_LatLng>? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::setProperCamera([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setProperCamera', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setProperCamera', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
@@ -146,157 +141,115 @@ class com_amap_api_trace_TraceOverlay extends java_lang_Object  {
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::zoopToSpan', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::zoopToSpan', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getTraceStatus() async {
+  Future<int?> getTraceStatus() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::getTraceStatus([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::getTraceStatus', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::getTraceStatus', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setTraceStatus(int var1) async {
+  Future<void> setTraceStatus(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::setTraceStatus([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setTraceStatus', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setTraceStatus', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getDistance() async {
+  Future<int?> getDistance() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::getDistance([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::getDistance', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::getDistance', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setDistance(int var1) async {
+  Future<void> setDistance(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::setDistance([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setDistance', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setDistance', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getWaitTime() async {
+  Future<int?> getWaitTime() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::getWaitTime([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::getWaitTime', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::getWaitTime', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setWaitTime(int var1) async {
+  Future<void> setWaitTime(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.trace.TraceOverlay@$refId::setWaitTime([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setWaitTime', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setWaitTime', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   //endregion
@@ -307,7 +260,12 @@ class com_amap_api_trace_TraceOverlay extends java_lang_Object  {
   }
 }
 
-extension com_amap_api_trace_TraceOverlay_Batch on List<com_amap_api_trace_TraceOverlay> {
+extension com_amap_api_trace_TraceOverlay_Batch on List<com_amap_api_trace_TraceOverlay?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
@@ -318,193 +276,113 @@ extension com_amap_api_trace_TraceOverlay_Batch on List<com_amap_api_trace_Trace
 
   //region methods
   
-  Future<List<void>> add_batch(List<List<com_amap_api_maps_model_LatLng>> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> add_batch(List<List<com_amap_api_maps_model_LatLng>?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::add_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::add_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
   Future<List<void>> remove_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::remove_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::remove_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<void>> setProperCamera_batch(List<List<com_amap_api_maps_model_LatLng>> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setProperCamera_batch(List<List<com_amap_api_maps_model_LatLng>?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setProperCamera_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setProperCamera_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
   Future<List<void>> zoopToSpan_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::zoopToSpan_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::zoopToSpan_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getTraceStatus_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getTraceStatus_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::getTraceStatus_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::getTraceStatus_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setTraceStatus_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setTraceStatus_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setTraceStatus_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setTraceStatus_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getDistance_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getDistance_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::getDistance_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::getDistance_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setDistance_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setDistance_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setDistance_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setDistance_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getWaitTime_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getWaitTime_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::getWaitTime_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::getWaitTime_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setWaitTime_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setWaitTime_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.trace.TraceOverlay::setWaitTime_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.trace.TraceOverlay::setWaitTime_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   //endregion

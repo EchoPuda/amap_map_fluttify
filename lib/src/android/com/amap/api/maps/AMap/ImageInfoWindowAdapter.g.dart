@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class _com_amap_api_maps_AMap_ImageInfoWindowAdapter_SUB extends java_lang_Object with com_amap_api_maps_AMap_InfoWindowAdapter, com_amap_api_maps_AMap_ImageInfoWindowAdapter {}
 
@@ -18,6 +21,8 @@ mixin com_amap_api_maps_AMap_ImageInfoWindowAdapter on com_amap_api_maps_AMap_In
   
 
   static com_amap_api_maps_AMap_ImageInfoWindowAdapter subInstance() => _com_amap_api_maps_AMap_ImageInfoWindowAdapter_SUB();
+
+  
 
   @override
   final String tag__ = 'amap_map_fluttify';
@@ -27,26 +32,20 @@ mixin com_amap_api_maps_AMap_ImageInfoWindowAdapter on com_amap_api_maps_AMap_In
   
 
   
-  Future<int> getInfoWindowUpdateTime() async {
+  Future<int?> getInfoWindowUpdateTime() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.AMap.ImageInfoWindowAdapter@$refId::getInfoWindowUpdateTime([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.AMap.ImageInfoWindowAdapter::getInfoWindowUpdateTime', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.AMap.ImageInfoWindowAdapter::getInfoWindowUpdateTime', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
 }
@@ -54,22 +53,14 @@ mixin com_amap_api_maps_AMap_ImageInfoWindowAdapter on com_amap_api_maps_AMap_In
 extension com_amap_api_maps_AMap_ImageInfoWindowAdapter_Batch on List<com_amap_api_maps_AMap_ImageInfoWindowAdapter> {
   //region methods
   
-  Future<List<int>> getInfoWindowUpdateTime_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getInfoWindowUpdateTime_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.AMap.ImageInfoWindowAdapter::getInfoWindowUpdateTime_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.AMap.ImageInfoWindowAdapter::getInfoWindowUpdateTime_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   //endregion

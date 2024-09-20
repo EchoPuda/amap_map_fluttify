@@ -1,8 +1,7 @@
 import 'package:amap_map_fluttify/src/android/android.export.g.dart';
 import 'package:amap_map_fluttify/src/ios/ios.export.g.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
-
-import 'models.dart';
+import 'package:uni_map_platform_interface/uni_map_platform_interface.dart';
 
 extension TraceLocationListX on List<TraceLocation> {
   /// 转换为android对象
@@ -51,9 +50,27 @@ extension com_amap_api_maps_model_LatLngListX
   Future<List<LatLng>> toDartModel() async {
     List<LatLng> result = [];
     for (final item in this) {
-      result.add(LatLng(await item.get_latitude(), await item.get_longitude()));
+      result.add(
+        LatLng(await item.get_latitude() ?? 0, await item.get_longitude() ?? 0),
+      );
     }
     return result;
+  }
+}
+
+extension LatLngListX on List<LatLng> {
+  Future<List<com_amap_api_maps_model_LatLng>> toAndroidList() async {
+    final latitudeBatch = map((e) => e.latitude).toList();
+    final longitudeBatch = map((e) => e.longitude).toList();
+    return await com_amap_api_maps_model_LatLng.create_batch__double__double(
+        latitudeBatch, longitudeBatch);
+  }
+
+  Future<List<CLLocationCoordinate2D>> toIOSList() async {
+    final latitudeBatch = map((e) => e.latitude).toList();
+    final longitudeBatch = map((e) => e.longitude).toList();
+    return await CLLocationCoordinate2D.create_batch(
+        latitudeBatch, longitudeBatch);
   }
 }
 
@@ -62,7 +79,9 @@ extension MATracePointListX on List<MATracePoint> {
   Future<List<LatLng>> toDartModel() async {
     List<LatLng> result = [];
     for (final item in this) {
-      result.add(LatLng(await item.get_latitude(), await item.get_longitude()));
+      result.add(
+        LatLng(await item.get_latitude() ?? 0, await item.get_longitude() ?? 0),
+      );
     }
     return result;
   }

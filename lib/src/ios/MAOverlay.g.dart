@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class _MAOverlay_SUB extends NSObject with MAAnnotation, MAOverlay {}
 
@@ -19,27 +22,74 @@ mixin MAOverlay on MAAnnotation {
 
   static MAOverlay subInstance() => _MAOverlay_SUB();
 
+  
+
   @override
   final String tag__ = 'amap_map_fluttify';
 
-  Future<CLLocationCoordinate2D> get_coordinate() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlay::get_coordinate", {'__this__': this});
-    return __result__ == null ? null : (CLLocationCoordinate2D()..refId = __result__);
-  }
-  
-  Future<MAMapRect> get_boundingMapRect() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlay::get_boundingMapRect", {'__this__': this});
-    return __result__ == null ? null : (MAMapRect()..refId = __result__);
-  }
   
 
   
 
+  
+  Future<CLLocationCoordinate2D?> coordinate() async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: MAOverlay@$refId::coordinate([])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlay::coordinate', {"__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return AmapMapFluttifyIOSAs<CLLocationCoordinate2D>(__result__);
+  }
+  
+  
+  Future<MAMapRect?> boundingMapRect() async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: MAOverlay@$refId::boundingMapRect([])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlay::boundingMapRect', {"__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return AmapMapFluttifyIOSAs<MAMapRect>(__result__);
+  }
   
 }
 
 extension MAOverlay_Batch on List<MAOverlay> {
   //region methods
+  
+  Future<List<CLLocationCoordinate2D?>> coordinate_batch() async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlay::coordinate_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<CLLocationCoordinate2D>(__result__)).cast<CLLocationCoordinate2D?>().toList();
+  }
+  
+  
+  Future<List<MAMapRect?>> boundingMapRect_batch() async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlay::boundingMapRect_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAMapRect>(__result__)).cast<MAMapRect?>().toList();
+  }
   
   //endregion
 }

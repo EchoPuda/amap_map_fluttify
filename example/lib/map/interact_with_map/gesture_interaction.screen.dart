@@ -34,7 +34,7 @@ class _GestureInteractionScreenState extends State<GestureInteractionScreen> {
           Flexible(
             child: DecoratedColumn(
               scrollable: true,
-              divider: kDividerZero,
+              divider: Divider(height: 1),
               children: <Widget>[
                 BooleanSetting(
                   head: '是否使能缩放手势',

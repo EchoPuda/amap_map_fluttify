@@ -11,12 +11,58 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _MATraceDelegate_SUB extends NSObject with MATraceDelegate {}
 
 mixin MATraceDelegate on NSObject {
   
 
+  static MATraceDelegate subInstance() => _MATraceDelegate_SUB();
+
+  static Future<MATraceDelegate> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MATraceDelegate::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyIOSAs<MATraceDelegate>(__result__)!;
+  
+    // handle callback
+    MethodChannel('MATraceDelegate::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'traceManager_didTrace_correct_distance_withError':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.traceManager_didTrace_correct_distance_withError?.call([\'manager\':${args['manager']}, \'locations\':${args['locations']}, \'tracePoints\':${args['tracePoints']}, \'distance\':${args['distance']}, \'error\':${args['error']}])');
+                }
+            
+                // handle the native call
+                __object__.traceManager_didTrace_correct_distance_withError?.call(AmapMapFluttifyIOSAs<MATraceManager>(args['manager']), (args['locations'] as List? ?? []).map((it) => AmapMapFluttifyIOSAs<CLLocation>(it)).where((e) => e != null).cast<CLLocation>().toList(), (args['tracePoints'] as List? ?? []).map((it) => AmapMapFluttifyIOSAs<MATracePoint>(it)).where((e) => e != null).cast<MATracePoint>().toList(), args['distance'], AmapMapFluttifyIOSAs<NSError>(args['error']));
+                break;
+              case 'mapViewRequireLocationAuth':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.mapViewRequireLocationAuth?.call([\'locationManager\':${args['locationManager']}])');
+                }
+            
+                // handle the native call
+                __object__.mapViewRequireLocationAuth?.call(AmapMapFluttifyIOSAs<CLLocationManager>(args['locationManager']));
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,11 +72,9 @@ mixin MATraceDelegate on NSObject {
 
   
 
-  @mustCallSuper
-  Future<void> traceManager_didTrace_correct_distance_withError(MATraceManager manager, List<CLLocation> locations, List<MATracePoint> tracePoints, double distance, NSError error) {}
+  Future<void> Function(MATraceManager? manager, List<CLLocation>? locations, List<MATracePoint>? tracePoints, double? distance, NSError? error)? traceManager_didTrace_correct_distance_withError;
   
-  @mustCallSuper
-  Future<void> mapViewRequireLocationAuth(CLLocationManager locationManager) {}
+  Future<void> Function(CLLocationManager? locationManager)? mapViewRequireLocationAuth;
   
 }
 

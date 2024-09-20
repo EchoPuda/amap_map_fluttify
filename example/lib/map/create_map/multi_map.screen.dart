@@ -48,7 +48,7 @@ class _MultiMapScreenState extends State<MultiMapScreen> {
           Flexible(
             child: DecoratedColumn(
               scrollable: true,
-              divider: kDividerZero,
+              divider: Divider(height: 1),
               children: <Widget>[
                 DiscreteSetting(
                   head: '选择地图实例 当前实例: $_currentInstance',
@@ -276,6 +276,15 @@ class _MultiMapScreenState extends State<MultiMapScreen> {
                   },
                 ),
                 ListTile(
+                  title: Center(child: Text('自定义地图')),
+                  onTap: () {
+                    _controller?.setCustomMapStyle(
+                      styleDataPath: 'raw/style.data',
+                      styleExtraPath: 'raw/style_extra.data',
+                    );
+                  },
+                ),
+                ListTile(
                   title: Center(child: Text('经纬度坐标转屏幕坐标')),
                   onTap: () async {
                     final centerLatLng =
@@ -292,18 +301,6 @@ class _MultiMapScreenState extends State<MultiMapScreen> {
                     final latLng =
                         await _controller?.fromScreenLocation(screenPoint);
                     toast('屏幕坐标(250, 250)对应的经纬度坐标为: $latLng');
-                  },
-                ),
-                ListTile(
-                  title: Center(child: Text('监听位置改变')),
-                  onTap: () async {
-                    await _controller
-                        ?.setMyLocationChangeListener((location) async {
-                      final coord = await location.coord;
-                      toast(
-                        '当前位置: 经度: ${coord.latitude}, 纬度: ${coord.longitude}, 方向: ${await location.bearing}',
-                      );
-                    });
                   },
                 ),
                 ListTile(

@@ -1,27 +1,27 @@
 name: amap_map_fluttify
 description: An `Amap` Map Component, Powered By `Fluttify` Compiler, A Dart Bindings Generator For Native SDK.
-version: 0.29.0
-author: yohom <yohombao@qq.com>
-homepage: https://github.com/fluttify-project/amap_map_fluttify
+version: 2.0.2
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
-  flutter: ">=1.12.13 <2.0.0"
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.12.13"
 
 dependencies:
   flutter:
     sdk: flutter
-  amap_core_fluttify: ^0.12.0
-  amap_location_fluttify: ^0.18.0
-  amap_search_fluttify: ^0.14.0
-  url_launcher: ^5.4.2
-  foundation_fluttify: ^0.9.9
-  core_location_fluttify: ^0.4.1
+  
+  uni_map_platform_interface: ^0.7.0-rc.0
+  url_launcher: ^6.1.6
+  foundation_fluttify: ^0.13.0+1
+  core_location_fluttify: ^0.7.1
+  amap_core_fluttify: ^0.17.0
+  amap_search_fluttify: ^0.18.0
+  amap_location_fluttify: ^0.22.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # pedantic: ^1.0.0
+  flutter_lints: any
 
 flutter:
   plugin:

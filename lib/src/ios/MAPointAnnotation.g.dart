@@ -11,8 +11,11 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-class MAPointAnnotation extends MAShape with MAAnnotation {
+class MAPointAnnotation extends MAShape with MAAnnotation, MAOverlay {
   //region constants
   static const String name__ = 'MAPointAnnotation';
 
@@ -24,58 +27,57 @@ class MAPointAnnotation extends MAShape with MAAnnotation {
 
   //region creators
   static Future<MAPointAnnotation> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAPointAnnotation', {'init': init});
-    final object = MAPointAnnotation()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAPointAnnotation',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAPointAnnotation>(__result__)!;
   }
   
   static Future<List<MAPointAnnotation>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAPointAnnotation', {'length': length, 'init': init});
-  
-    final List<MAPointAnnotation> typedResult = resultBatch.map((result) => MAPointAnnotation()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAPointAnnotation',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAPointAnnotation>(it))
+        .where((element) => element !=null)
+        .cast<MAPointAnnotation>()
+        .toList() ?? <MAPointAnnotation>[];
   }
   
   //endregion
 
   //region getters
-  Future<CLLocationCoordinate2D> get_coordinate() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAPointAnnotation::get_coordinate", {'__this__': this});
-    return __result__ == null ? null : (CLLocationCoordinate2D()..refId = __result__);
+  Future<CLLocationCoordinate2D?> get_coordinate() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAPointAnnotation::get_coordinate", {'__this__': this});
+    return AmapMapFluttifyIOSAs<CLLocationCoordinate2D>(__result__);
   }
   
-  Future<bool> get_lockedToScreen() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAPointAnnotation::get_isLockedToScreen", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<bool?> get_lockedToScreen() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAPointAnnotation::get_isLockedToScreen", {'__this__': this});
+    return __result__;
   }
   
-  Future<CGPoint> get_lockedScreenPoint() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAPointAnnotation::get_lockedScreenPoint", {'__this__': this});
-    return __result__ == null ? null : (CGPoint()..refId = __result__);
+  Future<CGPoint?> get_lockedScreenPoint() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAPointAnnotation::get_lockedScreenPoint", {'__this__': this});
+    return AmapMapFluttifyIOSAs<CGPoint>(__result__);
   }
   
   //endregion
 
   //region setters
-  Future<void> set_coordinate(CLLocationCoordinate2D coordinate) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAPointAnnotation::set_coordinate', <String, dynamic>{'__this__': this, "coordinate": coordinate});
-  
-  
+  Future<void> set_coordinate(CLLocationCoordinate2D? coordinate) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAPointAnnotation::set_coordinate', <String, dynamic>{'__this__': this, "coordinate": coordinate});
   }
   
-  Future<void> set_lockedToScreen(bool lockedToScreen) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAPointAnnotation::set_lockedToScreen', <String, dynamic>{'__this__': this, "lockedToScreen": lockedToScreen});
-  
-  
+  Future<void> set_lockedToScreen(bool? lockedToScreen) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAPointAnnotation::set_lockedToScreen', <String, dynamic>{'__this__': this, "lockedToScreen": lockedToScreen});
   }
   
-  Future<void> set_lockedScreenPoint(CGPoint lockedScreenPoint) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAPointAnnotation::set_lockedScreenPoint', <String, dynamic>{'__this__': this, "lockedScreenPoint": lockedScreenPoint});
-  
-  
+  Future<void> set_lockedScreenPoint(CGPoint? lockedScreenPoint) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAPointAnnotation::set_lockedScreenPoint', <String, dynamic>{'__this__': this, "lockedScreenPoint": lockedScreenPoint});
   }
   
   //endregion
@@ -90,46 +92,45 @@ class MAPointAnnotation extends MAShape with MAAnnotation {
   }
 }
 
-extension MAPointAnnotation_Batch on List<MAPointAnnotation> {
+extension MAPointAnnotation_Batch on List<MAPointAnnotation?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
-  Future<List<CLLocationCoordinate2D>> get_coordinate_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAPointAnnotation::get_coordinate_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => CLLocationCoordinate2D()..refId = __result__).toList();
-    return typedResult;
+  Future<List<CLLocationCoordinate2D?>> get_coordinate_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAPointAnnotation::get_coordinate_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<CLLocationCoordinate2D>(__result__)).cast<CLLocationCoordinate2D?>().toList();
   }
   
-  Future<List<bool>> get_lockedToScreen_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAPointAnnotation::get_isLockedToScreen_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<bool>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<bool?>> get_lockedToScreen_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAPointAnnotation::get_isLockedToScreen_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<bool?>().toList();
   }
   
-  Future<List<CGPoint>> get_lockedScreenPoint_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAPointAnnotation::get_lockedScreenPoint_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => CGPoint()..refId = __result__).toList();
-    return typedResult;
+  Future<List<CGPoint?>> get_lockedScreenPoint_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAPointAnnotation::get_lockedScreenPoint_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<CGPoint>(__result__)).cast<CGPoint?>().toList();
   }
   
   //endregion
 
   //region setters
-  Future<void> set_coordinate_batch(List<CLLocationCoordinate2D> coordinate) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec())).invokeMethod('MAPointAnnotation::set_coordinate_batch', [for (int __i__ = 0; __i__ < length; __i__++) {'__this__': this[__i__], "coordinate": coordinate[__i__]}]);
+  Future<void> set_coordinate_batch(List<CLLocationCoordinate2D?> coordinate) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAPointAnnotation::set_coordinate_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {'__this__': this[__i__], "coordinate": coordinate[__i__]}]);
   
   
   }
   
-  Future<void> set_lockedToScreen_batch(List<bool> lockedToScreen) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec())).invokeMethod('MAPointAnnotation::set_lockedToScreen_batch', [for (int __i__ = 0; __i__ < length; __i__++) {'__this__': this[__i__], "lockedToScreen": lockedToScreen[__i__]}]);
+  Future<void> set_lockedToScreen_batch(List<bool?> lockedToScreen) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAPointAnnotation::set_lockedToScreen_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {'__this__': this[__i__], "lockedToScreen": lockedToScreen[__i__]}]);
   
   
   }
   
-  Future<void> set_lockedScreenPoint_batch(List<CGPoint> lockedScreenPoint) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec())).invokeMethod('MAPointAnnotation::set_lockedScreenPoint_batch', [for (int __i__ = 0; __i__ < length; __i__++) {'__this__': this[__i__], "lockedScreenPoint": lockedScreenPoint[__i__]}]);
+  Future<void> set_lockedScreenPoint_batch(List<CGPoint?> lockedScreenPoint) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAPointAnnotation::set_lockedScreenPoint_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {'__this__': this[__i__], "lockedScreenPoint": lockedScreenPoint[__i__]}]);
   
   
   }

@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_model_Tile extends java_lang_Object with android_os_Parcelable {
   //region constants
@@ -23,38 +26,64 @@ class com_amap_api_maps_model_Tile extends java_lang_Object with android_os_Parc
   //endregion
 
   //region creators
-  static Future<com_amap_api_maps_model_Tile> create__int__int__byteArray(int var1, int var2, Uint8List var3) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_model_Tile__int__int__byteArray', {"var1": var1, "var2": var2, "var3": var3});
-    final object = com_amap_api_maps_model_Tile()..refId = refId;
-    return object;
+  static Future<com_amap_api_maps_model_Tile> create__int__int__byteArray(int? var1, int? var2, Uint8List? var3) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_Tile__int__int__byteArray',
+      {"var1": var1, "var2": var2, "var3": var3}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_Tile>(__result__)!;
   }
   
-  static Future<List<com_amap_api_maps_model_Tile>> create_batch__int__int__byteArray(List<int> var1, List<int> var2, List<Uint8List> var3) async {
-    if (var1.length != var2.length || var2.length != var3.length) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_model_Tile__int__int__byteArray', [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__], "var3": var3[__i__]}]);
+  static Future<com_amap_api_maps_model_Tile> create__int__int__byteArray__boolean(int? var1, int? var2, Uint8List? var3, bool? var4) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_Tile__int__int__byteArray__boolean',
+      {"var1": var1, "var2": var2, "var3": var3, "var4": var4}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_Tile>(__result__)!;
+  }
   
-    final List<com_amap_api_maps_model_Tile> typedResult = resultBatch.map((result) => com_amap_api_maps_model_Tile()..refId = result).toList();
-    return typedResult;
+  static Future<List<com_amap_api_maps_model_Tile>> create_batch__int__int__byteArray(List<int?> var1, List<int?> var2, List<Uint8List?> var3) async {
+    assert(var1.length == var2.length && var2.length == var3.length);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_Tile__int__int__byteArray',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__], "var3": var3[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_Tile>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_Tile>()
+        .toList() ?? <com_amap_api_maps_model_Tile>[];
+  }
+  
+  static Future<List<com_amap_api_maps_model_Tile>> create_batch__int__int__byteArray__boolean(List<int?> var1, List<int?> var2, List<Uint8List?> var3, List<bool?> var4) async {
+    assert(var1.length == var2.length && var2.length == var3.length && var3.length == var4.length);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_Tile__int__int__byteArray__boolean',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__], "var3": var3[__i__], "var4": var4[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_Tile>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_Tile>()
+        .toList() ?? <com_amap_api_maps_model_Tile>[];
   }
   
   //endregion
 
   //region getters
-  Future<int> get_width() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("com.amap.api.maps.model.Tile::get_width", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<int?> get_width() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("com.amap.api.maps.model.Tile::get_width", {'__this__': this});
+    return __result__;
   }
   
-  Future<int> get_height() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("com.amap.api.maps.model.Tile::get_height", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<int?> get_height() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("com.amap.api.maps.model.Tile::get_height", {'__this__': this});
+    return __result__;
   }
   
-  Future<Uint8List> get_data() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("com.amap.api.maps.model.Tile::get_data", {'__this__': this});
-    return __result__ == null ? null : (__result__ as Uint8List);
+  Future<Uint8List?> get_data() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("com.amap.api.maps.model.Tile::get_data", {'__this__': this});
+    return __result__ as Uint8List;
   }
   
   //endregion
@@ -65,26 +94,20 @@ class com_amap_api_maps_model_Tile extends java_lang_Object with android_os_Parc
 
   //region methods
   
-  static Future<com_amap_api_maps_model_Tile> obtain(int var0, int var1, Uint8List var2) async {
+  static Future<com_amap_api_maps_model_Tile?> obtain(int? var0, int? var1, Uint8List? var2) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.Tile::obtain([\'var0\':$var0, \'var1\':$var1, \'var2\':$var2])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.Tile::obtain', {"var0": var0, "var1": var1, "var2": var2});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.Tile::obtain', {"var0": var0, "var1": var1, "var2": var2});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = com_amap_api_maps_model_Tile()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_Tile>(__result__);
   }
   
   //endregion
@@ -95,27 +118,26 @@ class com_amap_api_maps_model_Tile extends java_lang_Object with android_os_Parc
   }
 }
 
-extension com_amap_api_maps_model_Tile_Batch on List<com_amap_api_maps_model_Tile> {
+extension com_amap_api_maps_model_Tile_Batch on List<com_amap_api_maps_model_Tile?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
-  Future<List<int>> get_width_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("com.amap.api.maps.model.Tile::get_width_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<int?>> get_width_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("com.amap.api.maps.model.Tile::get_width_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
-  Future<List<int>> get_height_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("com.amap.api.maps.model.Tile::get_height_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<int?>> get_height_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("com.amap.api.maps.model.Tile::get_height_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
-  Future<List<Uint8List>> get_data_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("com.amap.api.maps.model.Tile::get_data_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<Uint8List>().map((__result__) => __result__ as Uint8List).toList();
-    return typedResult;
+  Future<List<Uint8List?>> get_data_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("com.amap.api.maps.model.Tile::get_data_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__ as Uint8List).cast<Uint8List?>().toList();
   }
   
   //endregion
@@ -126,22 +148,14 @@ extension com_amap_api_maps_model_Tile_Batch on List<com_amap_api_maps_model_Til
 
   //region methods
   
-  static Future<List<com_amap_api_maps_model_Tile>> obtain_batch(List<int> var0, List<int> var1, List<Uint8List> var2) async {
-    if (var0.length != var1.length || var1.length != var2.length) {
-      return Future.error('all args must have same length!');
-    }
+  static Future<List<com_amap_api_maps_model_Tile?>> obtain_batch(List<int?> var0, List<int?> var1, List<Uint8List?> var2) async {
+    assert(var0.length == var1.length && var1.length == var2.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.Tile::obtain_batch', [for (int __i__ = 0; __i__ < var0.length; __i__++) {"var0": var0[__i__], "var1": var1[__i__], "var2": var2[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.Tile::obtain_batch', [for (int __i__ = 0; __i__ < var0.length; __i__++) {"var0": var0[__i__], "var1": var1[__i__], "var2": var2[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => com_amap_api_maps_model_Tile()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_Tile>(__result__)).cast<com_amap_api_maps_model_Tile?>().toList();
   }
   
   //endregion

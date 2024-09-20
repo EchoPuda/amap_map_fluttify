@@ -14,7 +14,7 @@
 
 @end
 
-@interface MAPinAnnotationViewPlatformView : NSObject <MATraceDelegate, MAMultiPointOverlayRendererDelegate, MAMapViewDelegate, FlutterPlatformView>
+@interface MAPinAnnotationViewPlatformView : NSObject
 
 - (instancetype)initWithViewId:(int64_t)viewId frame:(CGRect)frame registrar:(NSObject <FlutterPluginRegistrar> *)registrar arguments:(id _Nullable)args;
 

@@ -11,12 +11,49 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _com_amap_api_maps_AMap_OnMultiPointClickListener_SUB extends java_lang_Object with com_amap_api_maps_AMap_OnMultiPointClickListener {}
 
 mixin com_amap_api_maps_AMap_OnMultiPointClickListener on java_lang_Object {
   
 
+  static com_amap_api_maps_AMap_OnMultiPointClickListener subInstance() => _com_amap_api_maps_AMap_OnMultiPointClickListener_SUB();
+
+  static Future<com_amap_api_maps_AMap_OnMultiPointClickListener> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.AMap.OnMultiPointClickListener::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyAndroidAs<com_amap_api_maps_AMap_OnMultiPointClickListener>(__result__)!;
+  
+    // handle callback
+    MethodChannel('com.amap.api.maps.AMap.OnMultiPointClickListener::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'onPointClick':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onPointClick?.call([\'var1\':${args['var1']}])');
+                }
+            
+                // handle the native call
+                __object__.onPointClick?.call(AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointItem>(args['var1']));
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,8 +63,7 @@ mixin com_amap_api_maps_AMap_OnMultiPointClickListener on java_lang_Object {
 
   
 
-  @mustCallSuper
-  Future<bool> onPointClick(com_amap_api_maps_model_MultiPointItem var1) {}
+  Future<bool?> Function(com_amap_api_maps_model_MultiPointItem? var1)? onPointClick;
   
 }
 

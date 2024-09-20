@@ -11,12 +11,49 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _com_amap_api_maps_ExceptionLogger_SUB extends java_lang_Object with com_amap_api_maps_ExceptionLogger {}
 
 mixin com_amap_api_maps_ExceptionLogger on java_lang_Object {
   
 
+  static com_amap_api_maps_ExceptionLogger subInstance() => _com_amap_api_maps_ExceptionLogger_SUB();
+
+  static Future<com_amap_api_maps_ExceptionLogger> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.ExceptionLogger::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyAndroidAs<com_amap_api_maps_ExceptionLogger>(__result__)!;
+  
+    // handle callback
+    MethodChannel('com.amap.api.maps.ExceptionLogger::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'onDownloaderException_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onDownloaderException?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onDownloaderException?.call(args['var1'], args['var2']);
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,8 +63,7 @@ mixin com_amap_api_maps_ExceptionLogger on java_lang_Object {
 
   
 
-  @mustCallSuper
-  Future<void> onDownloaderException(int var1, int var2) {}
+  Future<void> Function(int? var1, int? var2)? onDownloaderException;
   
 }
 

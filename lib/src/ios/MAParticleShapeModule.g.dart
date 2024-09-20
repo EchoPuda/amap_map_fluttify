@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class _MAParticleShapeModule_SUB extends NSObject with MAParticleShapeModule {}
 
@@ -18,6 +21,8 @@ mixin MAParticleShapeModule on NSObject {
   
 
   static MAParticleShapeModule subInstance() => _MAParticleShapeModule_SUB();
+
+  
 
   @override
   final String tag__ = 'amap_map_fluttify';
@@ -27,49 +32,37 @@ mixin MAParticleShapeModule on NSObject {
   
 
   
-  Future<NSValue/* float* */> getPoint() async {
+  Future<NSValue/* float* */?> getPoint() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAParticleShapeModule@$refId::getPoint([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleShapeModule::getPoint', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAParticleShapeModule::getPoint', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = NSValue/* float* */()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<NSValue/* float* */>(__result__);
   }
   
   
-  Future<bool> isRatioEnable() async {
+  Future<bool?> isRatioEnable() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAParticleShapeModule@$refId::isRatioEnable([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleShapeModule::isRatioEnable', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAParticleShapeModule::isRatioEnable', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
 }
@@ -77,41 +70,25 @@ mixin MAParticleShapeModule on NSObject {
 extension MAParticleShapeModule_Batch on List<MAParticleShapeModule> {
   //region methods
   
-  Future<List<NSValue/* float* */>> getPoint_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<NSValue/* float* */?>> getPoint_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleShapeModule::getPoint_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAParticleShapeModule::getPoint_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => NSValue/* float* */()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<NSValue/* float* */>(__result__)).cast<NSValue/* float* */?>().toList();
   }
   
   
-  Future<List<bool>> isRatioEnable_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<bool?>> isRatioEnable_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleShapeModule::isRatioEnable_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAParticleShapeModule::isRatioEnable_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<bool>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<bool?>().toList();
   }
   
   //endregion

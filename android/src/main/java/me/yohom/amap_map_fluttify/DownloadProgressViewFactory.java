@@ -36,57 +36,10 @@ class DownloadProgressViewFactory extends PlatformViewFactory {
 
         this.messenger = messenger;
         this.activity = activity;
-
-        new MethodChannel(messenger, "me.yohom/amap_map_fluttify/com_amap_api_maps_offlinemap_DownloadProgressView", new StandardMethodCodec(new FluttifyMessageCodec())).setMethodCallHandler((methodCall, methodResult) -> {
-            Map<String, Object> args = (Map<String, Object>) methodCall.arguments;
-            AmapMapFluttifyPlugin.Handler handler = handlerMap.get(methodCall.method);
-            if (handler != null) {
-                try {
-                    handler.call(args, methodResult);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    methodResult.error(e.getMessage(), null, null);
-                }
-            } else {
-                methodResult.notImplemented();
-            }
-        });
     }
 
     private BinaryMessenger messenger;
     private Activity activity;
-
-    private final Map<String, AmapMapFluttifyPlugin.Handler> handlerMap = new HashMap<String, AmapMapFluttifyPlugin.Handler>() {{
-        // method
-        put("com.amap.api.maps.offlinemap.DownloadProgressView::setProgress", (__args__, __methodResult__) -> {
-            // args
-            // ref arg
-            Number var1 = (Number) ((Map<String, Object>) __args__).get("var1");
-        
-            // ref
-            com.amap.api.maps.offlinemap.DownloadProgressView __this__ = (com.amap.api.maps.offlinemap.DownloadProgressView) ((Map<String, Object>) __args__).get("__this__");
-        
-            // print log
-            if (getEnableLog()) {
-                Log.d("fluttify-java", "fluttify-java: com.amap.api.maps.offlinemap.DownloadProgressView@" + __this__ + "::setProgress(" + var1 + ")");
-            }
-        
-            // invoke native method
-            Void __result__ = null;
-            try {
-                __this__.setProgress(var1.intValue());
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-                if (getEnableLog()) {
-                    Log.d("Current HEAP: ", getHEAP().toString());
-                }
-                __methodResult__.error(throwable.getMessage(), null, null);
-                return;
-            }
-        
-            __methodResult__.success(__result__);
-        });
-    }};
 
     @Override
     public PlatformView create(Context context, int id, Object params) {
@@ -100,7 +53,7 @@ class DownloadProgressViewFactory extends PlatformViewFactory {
 
         // 同时存放viewId和refId的对象, 供后续viewId转refId使用
         getHEAP().put(String.valueOf(Integer.MAX_VALUE - id), view);
-        getHEAP().put(String.valueOf(System.identityHashCode(view)), view);
+        getHEAP().put("com.amap.api.maps.offlinemap.DownloadProgressView:" + String.valueOf(System.identityHashCode(view)), view);
         return new PlatformView() {
 
             // add to HEAP

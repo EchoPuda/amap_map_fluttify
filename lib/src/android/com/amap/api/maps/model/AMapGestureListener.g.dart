@@ -11,12 +11,112 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _com_amap_api_maps_model_AMapGestureListener_SUB extends java_lang_Object with com_amap_api_maps_model_AMapGestureListener {}
 
 mixin com_amap_api_maps_model_AMapGestureListener on java_lang_Object {
   
 
+  static com_amap_api_maps_model_AMapGestureListener subInstance() => _com_amap_api_maps_model_AMapGestureListener_SUB();
+
+  static Future<com_amap_api_maps_model_AMapGestureListener> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.AMapGestureListener::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyAndroidAs<com_amap_api_maps_model_AMapGestureListener>(__result__)!;
+  
+    // handle callback
+    MethodChannel('com.amap.api.maps.model.AMapGestureListener::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'onDoubleTap_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onDoubleTap?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onDoubleTap?.call(args['var1'], args['var2']);
+                break;
+              case 'onSingleTap_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onSingleTap?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onSingleTap?.call(args['var1'], args['var2']);
+                break;
+              case 'onFling_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onFling?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onFling?.call(args['var1'], args['var2']);
+                break;
+              case 'onScroll_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onScroll?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onScroll?.call(args['var1'], args['var2']);
+                break;
+              case 'onLongPress_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onLongPress?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onLongPress?.call(args['var1'], args['var2']);
+                break;
+              case 'onDown_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onDown?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onDown?.call(args['var1'], args['var2']);
+                break;
+              case 'onUp_':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onUp?.call([\'var1\':${args['var1']}, \'var2\':${args['var2']}])');
+                }
+            
+                // handle the native call
+                __object__.onUp?.call(args['var1'], args['var2']);
+                break;
+              case 'onMapStable':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onMapStable?.call([])');
+                }
+            
+                // handle the native call
+                __object__.onMapStable?.call();
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,29 +126,21 @@ mixin com_amap_api_maps_model_AMapGestureListener on java_lang_Object {
 
   
 
-  @mustCallSuper
-  Future<void> onDoubleTap(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onDoubleTap;
   
-  @mustCallSuper
-  Future<void> onSingleTap(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onSingleTap;
   
-  @mustCallSuper
-  Future<void> onFling(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onFling;
   
-  @mustCallSuper
-  Future<void> onScroll(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onScroll;
   
-  @mustCallSuper
-  Future<void> onLongPress(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onLongPress;
   
-  @mustCallSuper
-  Future<void> onDown(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onDown;
   
-  @mustCallSuper
-  Future<void> onUp(double var1, double var2) {}
+  Future<void> Function(double? var1, double? var2)? onUp;
   
-  @mustCallSuper
-  Future<void> onMapStable() {}
+  Future<void> Function()? onMapStable;
   
 }
 

@@ -11,8 +11,11 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-class MAParticleOverlay extends MAShape with MAOverlay, MAAnnotation {
+class MAParticleOverlay extends MAShape with MAAnnotation, MAOverlay {
   //region constants
   static const String name__ = 'MAParticleOverlay';
 
@@ -24,27 +27,32 @@ class MAParticleOverlay extends MAShape with MAOverlay, MAAnnotation {
 
   //region creators
   static Future<MAParticleOverlay> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAParticleOverlay', {'init': init});
-    final object = MAParticleOverlay()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAParticleOverlay',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAParticleOverlay>(__result__)!;
   }
   
   static Future<List<MAParticleOverlay>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAParticleOverlay', {'length': length, 'init': init});
-  
-    final List<MAParticleOverlay> typedResult = resultBatch.map((result) => MAParticleOverlay()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAParticleOverlay',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAParticleOverlay>(it))
+        .where((element) => element !=null)
+        .cast<MAParticleOverlay>()
+        .toList() ?? <MAParticleOverlay>[];
   }
   
   //endregion
 
   //region getters
-  Future<MAParticleOverlayOptions> get_overlayOption() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAParticleOverlay::get_overlayOption", {'__this__': this});
-    return __result__ == null ? null : (MAParticleOverlayOptions()..refId = __result__);
+  Future<MAParticleOverlayOptions?> get_overlayOption() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAParticleOverlay::get_overlayOption", {'__this__': this});
+    return AmapMapFluttifyIOSAs<MAParticleOverlayOptions>(__result__);
   }
   
   //endregion
@@ -55,49 +63,37 @@ class MAParticleOverlay extends MAShape with MAOverlay, MAAnnotation {
 
   //region methods
   
-  static Future<MAParticleOverlay> particleOverlayWithOption(MAParticleOverlayOptions option) async {
+  static Future<MAParticleOverlay?> particleOverlayWithOption(MAParticleOverlayOptions? option) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAParticleOverlay::particleOverlayWithOption([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleOverlay::particleOverlayWithOption', {"option": option});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAParticleOverlay::particleOverlayWithOption', {"option": option});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = MAParticleOverlay()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<MAParticleOverlay>(__result__);
   }
   
   
-  Future<void> updateOverlayOption(MAParticleOverlayOptions overlayOption) async {
+  Future<void> updateOverlayOption(MAParticleOverlayOptions? overlayOption) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAParticleOverlay@$refId::updateOverlayOption([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleOverlay::updateOverlayOption', {"overlayOption": overlayOption, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAParticleOverlay::updateOverlayOption', {"overlayOption": overlayOption, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   //endregion
@@ -108,13 +104,16 @@ class MAParticleOverlay extends MAShape with MAOverlay, MAAnnotation {
   }
 }
 
-extension MAParticleOverlay_Batch on List<MAParticleOverlay> {
+extension MAParticleOverlay_Batch on List<MAParticleOverlay?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
-  Future<List<MAParticleOverlayOptions>> get_overlayOption_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAParticleOverlay::get_overlayOption_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAParticleOverlayOptions()..refId = __result__).toList();
-    return typedResult;
+  Future<List<MAParticleOverlayOptions?>> get_overlayOption_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAParticleOverlay::get_overlayOption_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAParticleOverlayOptions>(__result__)).cast<MAParticleOverlayOptions?>().toList();
   }
   
   //endregion
@@ -125,41 +124,25 @@ extension MAParticleOverlay_Batch on List<MAParticleOverlay> {
 
   //region methods
   
-  static Future<List<MAParticleOverlay>> particleOverlayWithOption_batch(List<MAParticleOverlayOptions> option) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  static Future<List<MAParticleOverlay?>> particleOverlayWithOption_batch(List<MAParticleOverlayOptions?> option) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleOverlay::particleOverlayWithOption_batch', [for (int __i__ = 0; __i__ < option.length; __i__++) {"option": option[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAParticleOverlay::particleOverlayWithOption_batch', [for (int __i__ = 0; __i__ < option.length; __i__++) {"option": option[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAParticleOverlay()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAParticleOverlay>(__result__)).cast<MAParticleOverlay?>().toList();
   }
   
   
-  Future<List<void>> updateOverlayOption_batch(List<MAParticleOverlayOptions> overlayOption) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> updateOverlayOption_batch(List<MAParticleOverlayOptions?> overlayOption) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleOverlay::updateOverlayOption_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"overlayOption": overlayOption[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAParticleOverlay::updateOverlayOption_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"overlayOption": overlayOption[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   //endregion

@@ -14,7 +14,7 @@
 
 @end
 
-@interface MACustomCalloutViewPlatformView : NSObject <MATraceDelegate, MAMultiPointOverlayRendererDelegate, MAMapViewDelegate, FlutterPlatformView>
+@interface MACustomCalloutViewPlatformView : NSObject
 
 - (instancetype)initWithViewId:(int64_t)viewId frame:(CGRect)frame registrar:(NSObject <FlutterPluginRegistrar> *)registrar arguments:(id _Nullable)args;
 

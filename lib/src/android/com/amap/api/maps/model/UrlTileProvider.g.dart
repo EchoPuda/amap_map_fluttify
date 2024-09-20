@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 /* abstract */ class com_amap_api_maps_model_UrlTileProvider extends java_lang_Object with com_amap_api_maps_model_TileProvider {
   //region constants
@@ -44,7 +47,12 @@ import 'package:core_location_fluttify/core_location_fluttify.dart';
   }
 }
 
-extension com_amap_api_maps_model_UrlTileProvider_Batch on List<com_amap_api_maps_model_UrlTileProvider> {
+extension com_amap_api_maps_model_UrlTileProvider_Batch on List<com_amap_api_maps_model_UrlTileProvider?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

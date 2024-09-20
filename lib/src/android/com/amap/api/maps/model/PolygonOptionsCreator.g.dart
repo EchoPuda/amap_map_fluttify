@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_model_PolygonOptionsCreator extends java_lang_Object  {
   //region constants
@@ -24,19 +27,24 @@ class com_amap_api_maps_model_PolygonOptionsCreator extends java_lang_Object  {
 
   //region creators
   static Future<com_amap_api_maps_model_PolygonOptionsCreator> create__() async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_model_PolygonOptionsCreator__', );
-    final object = com_amap_api_maps_model_PolygonOptionsCreator()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_PolygonOptionsCreator__',
+    
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_PolygonOptionsCreator>(__result__)!;
   }
   
   static Future<List<com_amap_api_maps_model_PolygonOptionsCreator>> create_batch__(int length) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_model_PolygonOptionsCreator__', {'length': length});
-  
-    final List<com_amap_api_maps_model_PolygonOptionsCreator> typedResult = resultBatch.map((result) => com_amap_api_maps_model_PolygonOptionsCreator()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_PolygonOptionsCreator__',
+      {'length': length}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_PolygonOptionsCreator>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_PolygonOptionsCreator>()
+        .toList() ?? <com_amap_api_maps_model_PolygonOptionsCreator>[];
   }
   
   //endregion
@@ -50,6 +58,22 @@ class com_amap_api_maps_model_PolygonOptionsCreator extends java_lang_Object  {
   //endregion
 
   //region methods
+  
+  Future<List<com_amap_api_maps_model_PolygonOptions>?> newArray(int? var1) async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: com.amap.api.maps.model.PolygonOptionsCreator@$refId::newArray([\'var1\':$var1])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.PolygonOptionsCreator::newArray', {"var1": var1, "__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_PolygonOptions>(it)).where((e) => e != null).cast<com_amap_api_maps_model_PolygonOptions>().toList();
+  }
   
   //endregion
 
@@ -59,7 +83,12 @@ class com_amap_api_maps_model_PolygonOptionsCreator extends java_lang_Object  {
   }
 }
 
-extension com_amap_api_maps_model_PolygonOptionsCreator_Batch on List<com_amap_api_maps_model_PolygonOptionsCreator> {
+extension com_amap_api_maps_model_PolygonOptionsCreator_Batch on List<com_amap_api_maps_model_PolygonOptionsCreator?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
@@ -69,6 +98,16 @@ extension com_amap_api_maps_model_PolygonOptionsCreator_Batch on List<com_amap_a
   //endregion
 
   //region methods
+  
+  Future<List<List<com_amap_api_maps_model_PolygonOptions>?>> newArray_batch(List<int?> var1) async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.PolygonOptionsCreator::newArray_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_PolygonOptions>(it)).where((e) => e != null).cast<com_amap_api_maps_model_PolygonOptions>().toList()).cast<List<com_amap_api_maps_model_PolygonOptions>?>().toList();
+  }
   
   //endregion
 }

@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class MAOfflineItemNationWide extends MAOfflineCity  {
   //region constants
@@ -24,19 +27,24 @@ class MAOfflineItemNationWide extends MAOfflineCity  {
 
   //region creators
   static Future<MAOfflineItemNationWide> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAOfflineItemNationWide', {'init': init});
-    final object = MAOfflineItemNationWide()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAOfflineItemNationWide',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAOfflineItemNationWide>(__result__)!;
   }
   
   static Future<List<MAOfflineItemNationWide>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAOfflineItemNationWide', {'length': length, 'init': init});
-  
-    final List<MAOfflineItemNationWide> typedResult = resultBatch.map((result) => MAOfflineItemNationWide()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAOfflineItemNationWide',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAOfflineItemNationWide>(it))
+        .where((element) => element !=null)
+        .cast<MAOfflineItemNationWide>()
+        .toList() ?? <MAOfflineItemNationWide>[];
   }
   
   //endregion
@@ -59,7 +67,12 @@ class MAOfflineItemNationWide extends MAOfflineCity  {
   }
 }
 
-extension MAOfflineItemNationWide_Batch on List<MAOfflineItemNationWide> {
+extension MAOfflineItemNationWide_Batch on List<MAOfflineItemNationWide?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

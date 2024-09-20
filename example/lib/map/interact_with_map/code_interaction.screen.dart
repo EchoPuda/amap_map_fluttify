@@ -36,7 +36,7 @@ class _CodeInteractionScreenState extends State<CodeInteractionScreen> {
           Flexible(
             child: DecoratedColumn(
               scrollable: true,
-              divider: kDividerZero,
+              divider: Divider(height: 1),
               children: <Widget>[
                 ContinuousSetting(
                   head: '缩放大小',
@@ -44,6 +44,23 @@ class _CodeInteractionScreenState extends State<CodeInteractionScreen> {
                   max: 20,
                   onChanged: (value) {
                     _controller?.setZoomLevel(value);
+                  },
+                ),
+                ContinuousSetting(
+                  head: '(专业版)设置地图朝向',
+                  min: 0,
+                  max: 360,
+                  onChanged: (value) {
+                    debugPrint('bearing value: $value');
+                    _controller?.setBearing(105);
+                  },
+                ),
+                ContinuousSetting(
+                  head: '(专业版)设置地图倾斜度',
+                  min: 0,
+                  max: 90,
+                  onChanged: (value) {
+                    _controller?.setTilt(value);
                   },
                 ),
                 DiscreteSetting(

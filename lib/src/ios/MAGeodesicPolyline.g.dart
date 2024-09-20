@@ -11,8 +11,11 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-class MAGeodesicPolyline extends MAPolyline with MAOverlay, MAAnnotation {
+class MAGeodesicPolyline extends MAPolyline with MAAnnotation, MAOverlay {
   //region constants
   static const String name__ = 'MAGeodesicPolyline';
 
@@ -24,19 +27,24 @@ class MAGeodesicPolyline extends MAPolyline with MAOverlay, MAAnnotation {
 
   //region creators
   static Future<MAGeodesicPolyline> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAGeodesicPolyline', {'init': init});
-    final object = MAGeodesicPolyline()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAGeodesicPolyline',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAGeodesicPolyline>(__result__)!;
   }
   
   static Future<List<MAGeodesicPolyline>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAGeodesicPolyline', {'length': length, 'init': init});
-  
-    final List<MAGeodesicPolyline> typedResult = resultBatch.map((result) => MAGeodesicPolyline()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAGeodesicPolyline',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAGeodesicPolyline>(it))
+        .where((element) => element !=null)
+        .cast<MAGeodesicPolyline>()
+        .toList() ?? <MAGeodesicPolyline>[];
   }
   
   //endregion
@@ -59,7 +67,12 @@ class MAGeodesicPolyline extends MAPolyline with MAOverlay, MAAnnotation {
   }
 }
 
-extension MAGeodesicPolyline_Batch on List<MAGeodesicPolyline> {
+extension MAGeodesicPolyline_Batch on List<MAGeodesicPolyline?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

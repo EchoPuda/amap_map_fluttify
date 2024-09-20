@@ -5,6 +5,8 @@ import 'package:amap_map_fluttify_example/utils/next_latlng.dart';
 import 'package:decorated_flutter/decorated_flutter.dart';
 import 'package:demo_widgets/demo_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:vector_math/vector_math.dart' as vector;
 
 final _assetsIcon = AssetImage('images/test_icon.png');
 
@@ -13,7 +15,8 @@ class CreateMapScreen extends StatefulWidget {
   _CreateMapScreenState createState() => _CreateMapScreenState();
 }
 
-class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
+class _CreateMapScreenState extends State<CreateMapScreen>
+    with NextLatLng, DisposeBag {
   AmapController _controller;
 
   @override
@@ -24,30 +27,34 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
         children: <Widget>[
           Flexible(
             flex: 1,
-            child: AmapView(
-              mapType: MapType.Satellite,
-              showZoomControl: false,
-              tilt: 60,
-              zoomLevel: 17,
-              centerCoordinate: LatLng(29, 119),
-              maskDelay: Duration(milliseconds: 500),
-              onMapCreated: (controller) async {
-                _controller = controller;
-              },
+            child: DecoratedStack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                AmapView(
+                  showZoomControl: false,
+                  tilt: 60,
+                  zoomLevel: 17,
+                  centerCoordinate: LatLng(29, 119),
+                  maskDelay: Duration(milliseconds: 500),
+                  onMapCreated: (controller) async {
+                    _controller = controller;
+                  },
+                ),
+                // Image.asset('images/test_icon.png'),
+              ],
             ),
           ),
           Flexible(
             child: DecoratedColumn(
               scrollable: true,
-              divider: kDividerZero,
+              divider: Divider(height: 1),
               children: <Widget>[
                 BooleanSetting(
                   head: '是否显示定位',
                   onSelected: (value) async {
-                    await _controller?.showMyLocation(MyLocationOption(
-                      show: value,
-                      iconProvider: AssetImage('images/test_icon.png'),
-                    ));
+                    await Permission.location.request();
+                    await _controller
+                        ?.showMyLocation(MyLocationOption(show: value));
                   },
                 ),
                 DiscreteSetting(
@@ -56,6 +63,7 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
                     '只定位不移动地图到中心',
                     '定位一次并移动地图到中心',
                     '连续定位并跟随',
+                    '跟随但不移动到地图中心',
                     '连续定位跟随方向',
                   ],
                   onSelected: (String value) async {
@@ -70,6 +78,11 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
                     } else if (value == '连续定位并跟随') {
                       await _controller?.showMyLocation(MyLocationOption(
                         myLocationType: MyLocationType.Follow,
+                        interval: Duration(seconds: 3),
+                      ));
+                    } else if (value == '跟随但不移动到地图中心') {
+                      await _controller?.showMyLocation(MyLocationOption(
+                        myLocationType: MyLocationType.FollowNoCenter,
                       ));
                     } else if (value == '连续定位跟随方向') {
                       await _controller?.showMyLocation(MyLocationOption(
@@ -112,12 +125,16 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
                   },
                 ),
                 ListTile(
+                  title: Center(child: Text('旋转定位图标')),
+                  onTap: () async {
+                    await _controller.setMyLocationRotateAngle(90);
+                  },
+                ),
+                ListTile(
                   title: Center(child: Text('使用自定义定位图标')),
                   onTap: () async {
-                    await _controller?.showMyLocation(MyLocationOption(
-                      myLocationType: MyLocationType.Rotate,
-                      iconProvider: _assetsIcon,
-                    ));
+                    await _controller?.showMyLocation(
+                        MyLocationOption(iconProvider: _assetsIcon));
                   },
                 ),
                 BooleanSetting(
@@ -275,6 +292,15 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
                   },
                 ),
                 ListTile(
+                  title: Center(child: Text('自定义地图')),
+                  onTap: () {
+                    _controller?.setCustomMapStyle(
+                      styleDataPath: 'raw/style.data',
+                      styleExtraPath: 'raw/style_extra.data',
+                    );
+                  },
+                ),
+                ListTile(
                   title: Center(child: Text('经纬度坐标转屏幕坐标')),
                   onTap: () async {
                     final centerLatLng =
@@ -301,18 +327,6 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
                   },
                 ),
                 ListTile(
-                  title: Center(child: Text('监听位置改变')),
-                  onTap: () async {
-                    await _controller
-                        ?.setMyLocationChangeListener((location) async {
-                      final coord = await location.coord;
-                      toast(
-                        '当前位置: 经度: ${coord.latitude}, 纬度: ${coord.longitude}, 方向: ${await location.bearing}',
-                      );
-                    });
-                  },
-                ),
-                ListTile(
                   title: Center(child: Text('设置以地图为中心进行缩放')),
                   onTap: () async {
                     await _controller?.setZoomByCenter(true);
@@ -332,11 +346,157 @@ class _CreateMapScreenState extends State<CreateMapScreen> with NextLatLng {
                     toast('当前缩放等级: ${await _controller.getZoomLevel()}');
                   },
                 ),
+                ListTile(
+                  title: Center(child: Text('(专业版)一次性设置地图状态')),
+                  onTap: () async {
+                    final point = getNextLatLng();
+                    await _controller.setCameraPosition(
+                      coordinate: point,
+                      zoom: 12,
+                      tilt: 90,
+                      bearing: 339.000732421875,
+                      duration: Duration(seconds: 2),
+                    );
+                    await Future.delayed(Duration(seconds: 3));
+                    await _controller.setCameraPosition(
+                      coordinate: point,
+                      zoom: 12,
+                      tilt: 90,
+                      bearing: 400.86966387385837,
+                      duration: Duration(seconds: 2),
+                    );
+                    // await Future.delayed(Duration(seconds: 3));
+                    // await _controller.setCameraPosition(
+                    //   coordinate: point,
+                    //   zoom: 12,
+                    //   tilt: 90,
+                    //   bearing: 41,
+                    //   duration: Duration(seconds: 2),
+                    // );
+                  },
+                ),
+                ListTile(
+                  title: Center(child: Text('(专业版)设置地图锚点')),
+                  onTap: () {
+                    _controller.setMapAnchor(0.8, 0.8);
+                  },
+                ),
+                ListTile(
+                  title: Center(child: Text('测试')),
+                  onTap: () {
+                    context.navigator.push(MaterialPageRoute(
+                        builder: (context) => _SecondScreen()));
+                  },
+                ),
+                ListTile(
+                  title: Center(child: Text('根据朝向旋转定位图标')),
+                  onTap: () {
+                    AmapLocation.instance
+                        .listenLocation()
+                        .listen((it) =>
+                            _controller.setMyLocationRotateAngle(it.bearing))
+                        .addTo(disposeBag);
+                  },
+                ),
+                ListTile(
+                  title: Center(child: Text('行程动画')),
+                  onTap: () async {
+                    final result = await AmapSearch.instance.searchDriveRoute(
+                      from: LatLng(39.958245, 116.330929),
+                      to: LatLng(39.915599, 116.42912),
+                    );
+                    final pathList = await result.drivePathList;
+                    final stepList = [
+                      for (final path in pathList) ...await path.driveStepList
+                    ];
+                    final coordinateList = [
+                      for (final step in stepList) ...await step.polyline
+                    ];
+                    await _controller.addPlaybackTrace(
+                      coordinateList,
+                      iconProvider: _assetsIcon,
+                      duration: Duration(
+                        milliseconds: coordinateList.length * 500,
+                      ),
+                    );
+                    for (int i = 0; i < coordinateList.length; i++) {
+                      final last = coordinateList[max(i - 1, 0)];
+                      final current = coordinateList[i];
+                      await _controller.setCameraPosition(
+                        coordinate: coordinateList[i],
+                        zoom: 18,
+                        tilt: 45,
+                        bearing: bearing(
+                              last.latitude,
+                              last.longitude,
+                              current.latitude,
+                              current.longitude,
+                            ) -
+                            105,
+                      );
+                      await Future.delayed(Duration(milliseconds: 500));
+                    }
+                  },
+                ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  double bearing(double lat1, double lon1, double lat2, double lon2) {
+    double longitude1 = lon1;
+    double longitude2 = lon2;
+    double latitude1 = vector.radians(lat1);
+    double latitude2 = vector.radians(lat2);
+    double longDiff = vector.radians(longitude2 - longitude1);
+    double y = sin(longDiff) * cos(latitude2);
+    double x = cos(latitude1) * sin(latitude2) -
+        sin(latitude1) * cos(latitude2) * cos(longDiff);
+    return (vector.degrees((atan2(y, x)) + 360) % 360);
+  }
+
+  double getAngle(double lng1, double lat1, double lng2, double lat2) {
+    double dRotateAngle = atan2((lng2 - lng1).abs(), (lat2 - lat1).abs());
+    if (lng2 >= lng1) {
+      if (lat2 > lat1) {
+        dRotateAngle = 2 * pi - dRotateAngle;
+      }
+    } else {
+      if (lat2 >= lat1) {
+        dRotateAngle = pi + dRotateAngle;
+      } else {
+        dRotateAngle = pi - dRotateAngle;
+      }
+    }
+    dRotateAngle = dRotateAngle * 180 / pi;
+    return dRotateAngle;
+  }
+}
+
+class _SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedColumn(
+      children: [
+        Flexible(child: AmapView()),
+        RaisedButton(
+          onPressed: () {
+            AmapLocation.instance.listenLocation().listen((event) {
+              print(event);
+            });
+          },
+          child: Text('开始定位'),
+        ),
+        RaisedButton(
+          onPressed: () {
+            AmapLocation.instance.stopLocation();
+          },
+          child: Text('停止定位'),
+        ),
+      ],
     );
   }
 }

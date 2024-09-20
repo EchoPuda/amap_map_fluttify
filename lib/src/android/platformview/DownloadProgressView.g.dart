@@ -15,30 +15,35 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 typedef DownloadProgressViewCreatedCallback = void Function(com_amap_api_maps_offlinemap_DownloadProgressView controller);
 typedef _OnAndroidViewDispose = Future<void> Function();
 
-class com_amap_api_maps_offlinemap_DownloadProgressView_Android extends StatefulWidget {
-  const com_amap_api_maps_offlinemap_DownloadProgressView_Android({
-    Key key,
+class com_amap_api_maps_offlinemap_DownloadProgressView_AndroidView extends StatefulWidget {
+  const com_amap_api_maps_offlinemap_DownloadProgressView_AndroidView({
+    Key? key,
     this.onViewCreated,
     this.onDispose,
     this.params = const <String, dynamic>{},
     this.gestureRecognizers,
+    this.hybridComposition = false,
   }) : super(key: key);
 
-  final DownloadProgressViewCreatedCallback onViewCreated;
-  final _OnAndroidViewDispose onDispose;
+  final DownloadProgressViewCreatedCallback? onViewCreated;
+  final _OnAndroidViewDispose? onDispose;
   final Map<String, dynamic> params;
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+  final Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers;
+  final bool hybridComposition;
 
   @override
-  _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidState createState() => _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidState();
+  _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidViewState createState() => _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidViewState();
 }
 
-class _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidState extends State<com_amap_api_maps_offlinemap_DownloadProgressView_Android> {
-  com_amap_api_maps_offlinemap_DownloadProgressView _controller;
+class _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidViewState extends State<com_amap_api_maps_offlinemap_DownloadProgressView_AndroidView> {
+  com_amap_api_maps_offlinemap_DownloadProgressView? _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -46,59 +51,60 @@ class _com_amap_api_maps_offlinemap_DownloadProgressView_AndroidState extends St
       Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
     };
 
-    final messageCodec = FluttifyMessageCodec('amap_map_fluttify');
-
     // hybrid composition version.
-    // PlatformViewLink(
-    //   viewType: 'me.yohom/com.amap.api.maps.offlinemap.DownloadProgressView',
-    //   surfaceFactory: (
-    //     BuildContext context,
-    //     PlatformViewController controller,
-    //   ) {
-    //     return AndroidViewSurface(
-    //       controller: controller,
-    //       gestureRecognizers: gestureRecognizers,
-    //       hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-    //     );
-    //   },
-    //   onCreatePlatformView: (PlatformViewCreationParams params) {
-    //     return PlatformViewsService.initSurfaceAndroidView(
-    //       id: params.id,
-    //       viewType: 'me.yohom/com.amap.api.maps.offlinemap.DownloadProgressView',
-    //       layoutDirection: TextDirection.ltr,
-    //       creationParams: widget.params,
-    //       creationParamsCodec: messageCodec,
-    //     )
-    //       ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-    //       ..addOnPlatformViewCreatedListener((id) => _onViewCreated(id))
-    //       ..create();
-    //   },
-    // );
+    // if (widget.hybridComposition) {
+    //   return PlatformViewLink(
+    //     viewType: 'me.yohom/com.amap.api.maps.offlinemap.DownloadProgressView',
+    //     surfaceFactory: (
+    //       BuildContext context,
+    //       PlatformViewController controller,
+    //     ) {
+    //       return AndroidViewSurface(
+    //         controller: controller,
+    //         gestureRecognizers: gestureRecognizers,
+    //         hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+    //       );
+    //     },
+    //     onCreatePlatformView: (PlatformViewCreationParams params) {
+    //       return PlatformViewsService.initSurfaceAndroidView(
+    //         id: params.id,
+    //         viewType: 'me.yohom/com.amap.api.maps.offlinemap.DownloadProgressView',
+    //         layoutDirection: TextDirection.ltr,
+    //         creationParams: widget.params,
+    //         creationParamsCodec: kAmapMapFluttifyMessageCodec,
+    //       )
+    //         ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+    //         ..addOnPlatformViewCreatedListener((id) => _onViewCreated(id))
+    //         ..create();
+    //     },
+    //   );
+    // } else {
     return AndroidView(
       viewType: 'me.yohom/com.amap.api.maps.offlinemap.DownloadProgressView',
       gestureRecognizers: gestureRecognizers,
       onPlatformViewCreated: _onViewCreated,
-      creationParamsCodec: messageCodec,
+      creationParamsCodec: kAmapMapFluttifyMessageCodec,
       creationParams: widget.params,
     );
+    // }
   }
 
   void _onViewCreated(int id) async {
     // 碰到一个对象返回的hashCode为0的情况, 造成和这个id冲突了, 这里用一个magic number避免一下
     // 把viewId转换为refId再使用, 使其与其他对象统一
     final refId = await viewId2RefId((2147483647 - id).toString());
-    _controller = com_amap_api_maps_offlinemap_DownloadProgressView()..refId = refId;
+    _controller = com_amap_api_maps_offlinemap_DownloadProgressView()..refId = 'com.amap.api.maps.offlinemap.DownloadProgressView:$refId';
     if (widget.onViewCreated != null) {
-      widget.onViewCreated(_controller);
+      widget.onViewCreated!(_controller!);
     }
   }
 
   @override
   void dispose() {
     if (widget.onDispose != null) {
-      widget.onDispose().then((_) => _controller.release__());
+      widget.onDispose!().whenComplete(() => _controller?.release__());
     } else {
-      _controller.release__();
+      _controller?.release__();
     }
     super.dispose();
   }

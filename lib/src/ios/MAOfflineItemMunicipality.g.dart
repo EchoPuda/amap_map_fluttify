@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class MAOfflineItemMunicipality extends MAOfflineCity  {
   //region constants
@@ -24,19 +27,24 @@ class MAOfflineItemMunicipality extends MAOfflineCity  {
 
   //region creators
   static Future<MAOfflineItemMunicipality> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAOfflineItemMunicipality', {'init': init});
-    final object = MAOfflineItemMunicipality()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAOfflineItemMunicipality',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAOfflineItemMunicipality>(__result__)!;
   }
   
   static Future<List<MAOfflineItemMunicipality>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAOfflineItemMunicipality', {'length': length, 'init': init});
-  
-    final List<MAOfflineItemMunicipality> typedResult = resultBatch.map((result) => MAOfflineItemMunicipality()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAOfflineItemMunicipality',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAOfflineItemMunicipality>(it))
+        .where((element) => element !=null)
+        .cast<MAOfflineItemMunicipality>()
+        .toList() ?? <MAOfflineItemMunicipality>[];
   }
   
   //endregion
@@ -59,7 +67,12 @@ class MAOfflineItemMunicipality extends MAOfflineCity  {
   }
 }
 
-extension MAOfflineItemMunicipality_Batch on List<MAOfflineItemMunicipality> {
+extension MAOfflineItemMunicipality_Batch on List<MAOfflineItemMunicipality?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

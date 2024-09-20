@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_offlinemap_OfflineMapProvince extends com_amap_api_maps_offlinemap_Province with android_os_Parcelable {
   //region constants
@@ -24,19 +27,24 @@ class com_amap_api_maps_offlinemap_OfflineMapProvince extends com_amap_api_maps_
 
   //region creators
   static Future<com_amap_api_maps_offlinemap_OfflineMapProvince> create__() async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_offlinemap_OfflineMapProvince__', );
-    final object = com_amap_api_maps_offlinemap_OfflineMapProvince()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_offlinemap_OfflineMapProvince__',
+    
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_offlinemap_OfflineMapProvince>(__result__)!;
   }
   
   static Future<List<com_amap_api_maps_offlinemap_OfflineMapProvince>> create_batch__(int length) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_offlinemap_OfflineMapProvince__', {'length': length});
-  
-    final List<com_amap_api_maps_offlinemap_OfflineMapProvince> typedResult = resultBatch.map((result) => com_amap_api_maps_offlinemap_OfflineMapProvince()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_offlinemap_OfflineMapProvince__',
+      {'length': length}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_offlinemap_OfflineMapProvince>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_offlinemap_OfflineMapProvince>()
+        .toList() ?? <com_amap_api_maps_offlinemap_OfflineMapProvince>[];
   }
   
   //endregion
@@ -51,302 +59,224 @@ class com_amap_api_maps_offlinemap_OfflineMapProvince extends com_amap_api_maps_
 
   //region methods
   
-  Future<String> getUrl() async {
+  Future<String?> getUrl() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getUrl([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getUrl', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getUrl', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setUrl(String var1) async {
+  Future<void> setUrl(String? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::setUrl([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setUrl', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setUrl', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getState() async {
+  Future<int?> getState() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getState([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getState', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getState', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setState(int var1) async {
+  Future<void> setState(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::setState([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setState', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setState', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getSize() async {
+  Future<int?> getSize() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getSize([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getSize', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getSize', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setSize(int var1) async {
+  Future<void> setSize(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::setSize([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setSize', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setSize', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<String> getVersion() async {
+  Future<String?> getVersion() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getVersion([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getVersion', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getVersion', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setVersion(String var1) async {
+  Future<void> setVersion(String? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::setVersion([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setVersion', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setVersion', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<int> getcompleteCode() async {
+  Future<int?> getcompleteCode() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getcompleteCode([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getcompleteCode', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getcompleteCode', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<void> setCompleteCode(int var1) async {
+  Future<void> setCompleteCode(int? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::setCompleteCode([\'var1\':$var1])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCompleteCode', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCompleteCode', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<List<com_amap_api_maps_offlinemap_OfflineMapCity>> getCityList() async {
+  Future<List<com_amap_api_maps_offlinemap_OfflineMapCity>?> getCityList() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getCityList([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getCityList', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getCityList', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = (__result__ as List).cast<String>().map((__it__) => com_amap_api_maps_offlinemap_OfflineMapCity()..refId = __it__).toList();
-      return __return__;
-    }
+    return (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_offlinemap_OfflineMapCity>(it)).where((e) => e != null).cast<com_amap_api_maps_offlinemap_OfflineMapCity>().toList();
   }
   
   
-  Future<List<com_amap_api_maps_offlinemap_OfflineMapCity>> getDownloadedCityList() async {
+  Future<List<com_amap_api_maps_offlinemap_OfflineMapCity>?> getDownloadedCityList() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::getDownloadedCityList([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getDownloadedCityList', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getDownloadedCityList', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = (__result__ as List).cast<String>().map((__it__) => com_amap_api_maps_offlinemap_OfflineMapCity()..refId = __it__).toList();
-      return __return__;
-    }
+    return (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_offlinemap_OfflineMapCity>(it)).where((e) => e != null).cast<com_amap_api_maps_offlinemap_OfflineMapCity>().toList();
   }
   
   
-  Future<void> setCityList(List<com_amap_api_maps_offlinemap_OfflineMapCity> var1) async {
+  Future<void> setCityList(List<com_amap_api_maps_offlinemap_OfflineMapCity>? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.offlinemap.OfflineMapProvince@$refId::setCityList([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCityList', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCityList', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   //endregion
@@ -357,7 +287,12 @@ class com_amap_api_maps_offlinemap_OfflineMapProvince extends com_amap_api_maps_
   }
 }
 
-extension com_amap_api_maps_offlinemap_OfflineMapProvince_Batch on List<com_amap_api_maps_offlinemap_OfflineMapProvince> {
+extension com_amap_api_maps_offlinemap_OfflineMapProvince_Batch on List<com_amap_api_maps_offlinemap_OfflineMapProvince?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
@@ -368,250 +303,146 @@ extension com_amap_api_maps_offlinemap_OfflineMapProvince_Batch on List<com_amap
 
   //region methods
   
-  Future<List<String>> getUrl_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<String?>> getUrl_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getUrl_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getUrl_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<String?>().toList();
   }
   
   
-  Future<List<void>> setUrl_batch(List<String> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setUrl_batch(List<String?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setUrl_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setUrl_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getState_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getState_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getState_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getState_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setState_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setState_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setState_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setState_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getSize_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getSize_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getSize_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getSize_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setSize_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setSize_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setSize_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setSize_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<String>> getVersion_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<String?>> getVersion_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getVersion_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getVersion_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<String?>().toList();
   }
   
   
-  Future<List<void>> setVersion_batch(List<String> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setVersion_batch(List<String?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setVersion_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setVersion_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<int>> getcompleteCode_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<int?>> getcompleteCode_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getcompleteCode_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getcompleteCode_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
   
-  Future<List<void>> setCompleteCode_batch(List<int> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setCompleteCode_batch(List<int?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCompleteCode_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCompleteCode_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   
-  Future<List<List<com_amap_api_maps_offlinemap_OfflineMapCity>>> getCityList_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<List<com_amap_api_maps_offlinemap_OfflineMapCity>?>> getCityList_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getCityList_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getCityList_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => (__result__ as List).cast<String>().map((__it__) => com_amap_api_maps_offlinemap_OfflineMapCity()..refId = __it__).toList()).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_offlinemap_OfflineMapCity>(it)).where((e) => e != null).cast<com_amap_api_maps_offlinemap_OfflineMapCity>().toList()).cast<List<com_amap_api_maps_offlinemap_OfflineMapCity>?>().toList();
   }
   
   
-  Future<List<List<com_amap_api_maps_offlinemap_OfflineMapCity>>> getDownloadedCityList_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<List<com_amap_api_maps_offlinemap_OfflineMapCity>?>> getDownloadedCityList_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getDownloadedCityList_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::getDownloadedCityList_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => (__result__ as List).cast<String>().map((__it__) => com_amap_api_maps_offlinemap_OfflineMapCity()..refId = __it__).toList()).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_offlinemap_OfflineMapCity>(it)).where((e) => e != null).cast<com_amap_api_maps_offlinemap_OfflineMapCity>().toList()).cast<List<com_amap_api_maps_offlinemap_OfflineMapCity>?>().toList();
   }
   
   
-  Future<List<void>> setCityList_batch(List<List<com_amap_api_maps_offlinemap_OfflineMapCity>> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<void>> setCityList_batch(List<List<com_amap_api_maps_offlinemap_OfflineMapCity>?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCityList_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.offlinemap.OfflineMapProvince::setCityList_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   //endregion

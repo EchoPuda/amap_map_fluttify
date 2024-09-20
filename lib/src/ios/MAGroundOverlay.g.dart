@@ -11,8 +11,11 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-class MAGroundOverlay extends MAShape with MAOverlay, MAAnnotation {
+class MAGroundOverlay extends MAShape with MAAnnotation, MAOverlay {
   //region constants
   static const String name__ = 'MAGroundOverlay';
 
@@ -24,146 +27,125 @@ class MAGroundOverlay extends MAShape with MAOverlay, MAAnnotation {
 
   //region creators
   static Future<MAGroundOverlay> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAGroundOverlay', {'init': init});
-    final object = MAGroundOverlay()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAGroundOverlay',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAGroundOverlay>(__result__)!;
   }
   
   static Future<List<MAGroundOverlay>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAGroundOverlay', {'length': length, 'init': init});
-  
-    final List<MAGroundOverlay> typedResult = resultBatch.map((result) => MAGroundOverlay()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAGroundOverlay',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAGroundOverlay>(it))
+        .where((element) => element !=null)
+        .cast<MAGroundOverlay>()
+        .toList() ?? <MAGroundOverlay>[];
   }
   
   //endregion
 
   //region getters
-  Future<UIImage> get_icon() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_icon", {'__this__': this});
-    return __result__ == null ? null : (UIImage()..refId = __result__);
+  Future<UIImage?> get_icon() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_icon", {'__this__': this});
+    return AmapMapFluttifyIOSAs<UIImage>(__result__);
   }
   
-  Future<double> get_alpha() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_alpha", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<double?> get_alpha() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_alpha", {'__this__': this});
+    return __result__;
   }
   
-  Future<double> get_zoomLevel() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_zoomLevel", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<double?> get_zoomLevel() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_zoomLevel", {'__this__': this});
+    return __result__;
   }
   
-  Future<MACoordinateBounds> get_bounds() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_bounds", {'__this__': this});
-    return __result__ == null ? null : (MACoordinateBounds()..refId = __result__);
+  Future<MACoordinateBounds?> get_bounds() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_bounds", {'__this__': this});
+    return AmapMapFluttifyIOSAs<MACoordinateBounds>(__result__);
   }
   
   //endregion
 
   //region setters
-  Future<void> set_alpha(double alpha) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::set_alpha', <String, dynamic>{'__this__': this, "alpha": alpha});
-  
-  
+  Future<void> set_alpha(double? alpha) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::set_alpha', <String, dynamic>{'__this__': this, "alpha": alpha});
   }
   
   //endregion
 
   //region methods
   
-  static Future<MAGroundOverlay> groundOverlayWithBounds_icon(MACoordinateBounds bounds, UIImage icon) async {
+  static Future<MAGroundOverlay?> groundOverlayWithBounds_icon(MACoordinateBounds? bounds, UIImage? icon) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAGroundOverlay::groundOverlayWithBounds([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::groundOverlayWithBounds_icon', {"bounds": bounds, "icon": icon});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::groundOverlayWithBounds_icon', {"bounds": bounds, "icon": icon});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = MAGroundOverlay()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<MAGroundOverlay>(__result__);
   }
   
   
-  static Future<MAGroundOverlay> groundOverlayWithCoordinate_zoomLevel_icon(CLLocationCoordinate2D coordinate, double zoomLevel, UIImage icon) async {
+  static Future<MAGroundOverlay?> groundOverlayWithCoordinate_zoomLevel_icon(CLLocationCoordinate2D? coordinate, double? zoomLevel, UIImage? icon) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAGroundOverlay::groundOverlayWithCoordinate([\'zoomLevel\':$zoomLevel])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::groundOverlayWithCoordinate_zoomLevel_icon', {"coordinate": coordinate, "zoomLevel": zoomLevel, "icon": icon});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::groundOverlayWithCoordinate_zoomLevel_icon', {"coordinate": coordinate, "zoomLevel": zoomLevel, "icon": icon});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = MAGroundOverlay()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<MAGroundOverlay>(__result__);
   }
   
   
-  Future<bool> setGroundOverlayWithBounds_icon(MACoordinateBounds bounds, UIImage icon) async {
+  Future<bool?> setGroundOverlayWithBounds_icon(MACoordinateBounds? bounds, UIImage? icon) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAGroundOverlay@$refId::setGroundOverlayWithBounds([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::setGroundOverlayWithBounds_icon', {"bounds": bounds, "icon": icon, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::setGroundOverlayWithBounds_icon', {"bounds": bounds, "icon": icon, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<bool> setGroundOverlayWithCoordinate_zoomLevel_icon(CLLocationCoordinate2D coordinate, double zoomLevel, UIImage icon) async {
+  Future<bool?> setGroundOverlayWithCoordinate_zoomLevel_icon(CLLocationCoordinate2D? coordinate, double? zoomLevel, UIImage? icon) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAGroundOverlay@$refId::setGroundOverlayWithCoordinate([\'zoomLevel\':$zoomLevel])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::setGroundOverlayWithCoordinate_zoomLevel_icon', {"coordinate": coordinate, "zoomLevel": zoomLevel, "icon": icon, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::setGroundOverlayWithCoordinate_zoomLevel_icon', {"coordinate": coordinate, "zoomLevel": zoomLevel, "icon": icon, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   //endregion
@@ -174,41 +156,38 @@ class MAGroundOverlay extends MAShape with MAOverlay, MAAnnotation {
   }
 }
 
-extension MAGroundOverlay_Batch on List<MAGroundOverlay> {
+extension MAGroundOverlay_Batch on List<MAGroundOverlay?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
-  Future<List<UIImage>> get_icon_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_icon_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => UIImage()..refId = __result__).toList();
-    return typedResult;
+  Future<List<UIImage?>> get_icon_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_icon_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<UIImage>(__result__)).cast<UIImage?>().toList();
   }
   
-  Future<List<double>> get_alpha_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_alpha_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<double?>> get_alpha_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_alpha_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
-  Future<List<double>> get_zoomLevel_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_zoomLevel_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<double?>> get_zoomLevel_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_zoomLevel_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
-  Future<List<MACoordinateBounds>> get_bounds_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAGroundOverlay::get_bounds_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => MACoordinateBounds()..refId = __result__).toList();
-    return typedResult;
+  Future<List<MACoordinateBounds?>> get_bounds_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAGroundOverlay::get_bounds_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MACoordinateBounds>(__result__)).cast<MACoordinateBounds?>().toList();
   }
   
   //endregion
 
   //region setters
-  Future<void> set_alpha_batch(List<double> alpha) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec())).invokeMethod('MAGroundOverlay::set_alpha_batch', [for (int __i__ = 0; __i__ < length; __i__++) {'__this__': this[__i__], "alpha": alpha[__i__]}]);
+  Future<void> set_alpha_batch(List<double?> alpha) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::set_alpha_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {'__this__': this[__i__], "alpha": alpha[__i__]}]);
   
   
   }
@@ -217,79 +196,47 @@ extension MAGroundOverlay_Batch on List<MAGroundOverlay> {
 
   //region methods
   
-  static Future<List<MAGroundOverlay>> groundOverlayWithBounds_icon_batch(List<MACoordinateBounds> bounds, List<UIImage> icon) async {
-    if (bounds.length != icon.length) {
-      return Future.error('all args must have same length!');
-    }
+  static Future<List<MAGroundOverlay?>> groundOverlayWithBounds_icon_batch(List<MACoordinateBounds?> bounds, List<UIImage?> icon) async {
+    assert(bounds.length == icon.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::groundOverlayWithBounds_icon_batch', [for (int __i__ = 0; __i__ < bounds.length; __i__++) {"bounds": bounds[__i__], "icon": icon[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::groundOverlayWithBounds_icon_batch', [for (int __i__ = 0; __i__ < bounds.length; __i__++) {"bounds": bounds[__i__], "icon": icon[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAGroundOverlay()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAGroundOverlay>(__result__)).cast<MAGroundOverlay?>().toList();
   }
   
   
-  static Future<List<MAGroundOverlay>> groundOverlayWithCoordinate_zoomLevel_icon_batch(List<CLLocationCoordinate2D> coordinate, List<double> zoomLevel, List<UIImage> icon) async {
-    if (coordinate.length != zoomLevel.length || zoomLevel.length != icon.length) {
-      return Future.error('all args must have same length!');
-    }
+  static Future<List<MAGroundOverlay?>> groundOverlayWithCoordinate_zoomLevel_icon_batch(List<CLLocationCoordinate2D?> coordinate, List<double?> zoomLevel, List<UIImage?> icon) async {
+    assert(coordinate.length == zoomLevel.length && zoomLevel.length == icon.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::groundOverlayWithCoordinate_zoomLevel_icon_batch', [for (int __i__ = 0; __i__ < coordinate.length; __i__++) {"coordinate": coordinate[__i__], "zoomLevel": zoomLevel[__i__], "icon": icon[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::groundOverlayWithCoordinate_zoomLevel_icon_batch', [for (int __i__ = 0; __i__ < coordinate.length; __i__++) {"coordinate": coordinate[__i__], "zoomLevel": zoomLevel[__i__], "icon": icon[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAGroundOverlay()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAGroundOverlay>(__result__)).cast<MAGroundOverlay?>().toList();
   }
   
   
-  Future<List<bool>> setGroundOverlayWithBounds_icon_batch(List<MACoordinateBounds> bounds, List<UIImage> icon) async {
-    if (bounds.length != icon.length) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<bool?>> setGroundOverlayWithBounds_icon_batch(List<MACoordinateBounds?> bounds, List<UIImage?> icon) async {
+    assert(bounds.length == icon.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::setGroundOverlayWithBounds_icon_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"bounds": bounds[__i__], "icon": icon[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::setGroundOverlayWithBounds_icon_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"bounds": bounds[__i__], "icon": icon[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<bool>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<bool?>().toList();
   }
   
   
-  Future<List<bool>> setGroundOverlayWithCoordinate_zoomLevel_icon_batch(List<CLLocationCoordinate2D> coordinate, List<double> zoomLevel, List<UIImage> icon) async {
-    if (coordinate.length != zoomLevel.length || zoomLevel.length != icon.length) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<bool?>> setGroundOverlayWithCoordinate_zoomLevel_icon_batch(List<CLLocationCoordinate2D?> coordinate, List<double?> zoomLevel, List<UIImage?> icon) async {
+    assert(coordinate.length == zoomLevel.length && zoomLevel.length == icon.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAGroundOverlay::setGroundOverlayWithCoordinate_zoomLevel_icon_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"coordinate": coordinate[__i__], "zoomLevel": zoomLevel[__i__], "icon": icon[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAGroundOverlay::setGroundOverlayWithCoordinate_zoomLevel_icon_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"coordinate": coordinate[__i__], "zoomLevel": zoomLevel[__i__], "icon": icon[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<bool>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<bool?>().toList();
   }
   
   //endregion

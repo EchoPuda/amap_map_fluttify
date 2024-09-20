@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_model_animation_AlphaAnimation extends com_amap_api_maps_model_animation_Animation  {
   //region constants
@@ -23,20 +26,25 @@ class com_amap_api_maps_model_animation_AlphaAnimation extends com_amap_api_maps
   //endregion
 
   //region creators
-  static Future<com_amap_api_maps_model_animation_AlphaAnimation> create__float__float(double var1, double var2) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_model_animation_AlphaAnimation__float__float', {"var1": var1, "var2": var2});
-    final object = com_amap_api_maps_model_animation_AlphaAnimation()..refId = refId;
-    return object;
+  static Future<com_amap_api_maps_model_animation_AlphaAnimation> create__float__float(double? var1, double? var2) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_animation_AlphaAnimation__float__float',
+      {"var1": var1, "var2": var2}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_animation_AlphaAnimation>(__result__)!;
   }
   
-  static Future<List<com_amap_api_maps_model_animation_AlphaAnimation>> create_batch__float__float(List<double> var1, List<double> var2) async {
-    if (var1.length != var2.length) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_model_animation_AlphaAnimation__float__float', [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__]}]);
-  
-    final List<com_amap_api_maps_model_animation_AlphaAnimation> typedResult = resultBatch.map((result) => com_amap_api_maps_model_animation_AlphaAnimation()..refId = result).toList();
-    return typedResult;
+  static Future<List<com_amap_api_maps_model_animation_AlphaAnimation>> create_batch__float__float(List<double?> var1, List<double?> var2) async {
+    assert(var1.length == var2.length);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_animation_AlphaAnimation__float__float',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_animation_AlphaAnimation>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_animation_AlphaAnimation>()
+        .toList() ?? <com_amap_api_maps_model_animation_AlphaAnimation>[];
   }
   
   //endregion
@@ -59,7 +67,12 @@ class com_amap_api_maps_model_animation_AlphaAnimation extends com_amap_api_maps
   }
 }
 
-extension com_amap_api_maps_model_animation_AlphaAnimation_Batch on List<com_amap_api_maps_model_animation_AlphaAnimation> {
+extension com_amap_api_maps_model_animation_AlphaAnimation_Batch on List<com_amap_api_maps_model_animation_AlphaAnimation?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

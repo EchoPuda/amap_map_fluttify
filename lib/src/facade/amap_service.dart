@@ -7,48 +7,96 @@ import 'package:amap_map_fluttify/src/ios/ios.export.g.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import 'custom/android/PathSmoothTool.g.dart';
+import 'custom/ios/MALonLatPoint.g.dart';
+import 'custom/ios/MASmoothPathTool.g.dart';
 import 'extensions.dart';
-import 'list.x.dart';
 
 export 'package:amap_core_fluttify/amap_core_fluttify.dart';
 
 /// 轨迹纠偏过程回调，一条轨迹分割为多个段，按索引顺序回调其中一段 [index]片段索引 [traceList]当前片段的经纬度列表
 typedef OnTraceProcessing = Future<void> Function(
-    int index, List<LatLng> traceList);
+  int index,
+  List<LatLng> traceList,
+);
 
 /// 轨迹纠偏成功回调 [traceList]纠偏后的经纬度列表 [distance]路程
 typedef OnTraceFinished = Future<void> Function(
-    List<LatLng> traceList, int distance);
+  List<LatLng> traceList,
+  int distance,
+);
 
 /// 轨迹纠偏失败回调
 typedef OnTraceFailed = Future<void> Function(int errorCode, String errorInfo);
 
-final _traceListener = _TraceListener();
+// final _traceListener = _TraceListener();
 
 /// 除了地图以外的功能放在这里, 比如说sdk初始化
-class AmapService {
+class AmapService implements IMapService {
   static AmapService instance = AmapService._();
 
   AmapService._();
 
-  String _webKey;
+  String? _webKey;
 
   /// 设置ios和android的app key
+  @override
   Future<void> init({
-    @required String iosKey,
-    @required String androidKey,
-    String webApiKey,
+    String? iosKey,
+    String? androidKey,
+    String? webKey,
   }) async {
-    _webKey = webApiKey;
-    await AmapLocation.instance.init(iosKey: iosKey);
+    _webKey = webKey;
+    if (iosKey != null) await AmapLocation.instance.init(iosKey: iosKey);
     await platform(
       android: (pool) async {
-        await com_amap_api_maps_MapsInitializer.setApiKey(androidKey);
+        if (androidKey != null) {
+          await com_amap_api_maps_MapsInitializer.setApiKey(androidKey);
+        }
       },
       ios: (pool) async {
-        await AmapCore.init(iosKey);
+        if (iosKey != null) await AmapCore.init(iosKey);
+      },
+    );
+  }
+
+  /// 隐私是否已经展示
+  Future<void> updatePrivacyShow(bool value) async {
+    return platform(
+      android: (pool) async {
+        final context = await android_app_Application.get();
+        await com_amap_api_maps_MapsInitializer.updatePrivacyShow(
+            context, value, true);
+      },
+      ios: (pool) async {
+        MAMapView.updatePrivacyShow_privacyInfo(
+          value
+              ? AMapPrivacyShowStatus.AMapPrivacyShowStatusDidShow
+              : AMapPrivacyShowStatus.AMapPrivacyShowStatusNotShow,
+          AMapPrivacyInfoStatus.AMapPrivacyInfoStatusDidContain,
+        );
+      },
+    );
+  }
+
+  /// 隐私是否已经同意
+  Future<void> updatePrivacyAgree(bool value) async {
+    return platform(
+      android: (pool) async {
+        final context = await android_app_Application.get();
+        await com_amap_api_maps_MapsInitializer.updatePrivacyAgree(
+          context,
+          value,
+        );
+      },
+      ios: (pool) async {
+        await MAMapView.updatePrivacyAgree(
+          value
+              ? AMapPrivacyAgreeStatus.AMapPrivacyAgreeStatusDidAgree
+              : AMapPrivacyAgreeStatus.AMapPrivacyAgreeStatusNotAgree,
+        );
       },
     );
   }
@@ -71,9 +119,11 @@ class AmapService {
             _location1, _location2);
 
         // 释放两个点
-        pool..add(_location1)..add(_location2);
+        pool
+          ..add(_location1)
+          ..add(_location2);
 
-        return result;
+        return result ?? 0;
       },
       ios: (pool) async {
         // 点1
@@ -87,27 +137,34 @@ class AmapService {
         final mapPoint2 = await MAMapPointForCoordinate(_location2);
 
         // 计算结果
-        final result = await MAMetersBetweenMapPoints(mapPoint1, mapPoint2);
+        final result = await MAMetersBetweenMapPoints(mapPoint1!, mapPoint2!);
 
         // 释放两个点相关的数据
-        pool..add(_location1)..add(_location2)..add(mapPoint1)..add(mapPoint2);
+        pool
+          ..add(_location1)
+          ..add(_location2)
+          ..add(mapPoint1)
+          ..add(mapPoint2);
 
-        return result;
+        return result ?? 0;
       },
     );
   }
 
   /// 转换其他坐标系到高德坐标系
   ///
-  /// [coord]待转换坐标, [fromType]待转换坐标的坐标系
-  Future<LatLng> convertCoord(LatLng coord, CoordType fromType) async {
+  /// [coordinate]待转换坐标, [fromType]待转换坐标的坐标系
+  Future<LatLng> convertCoordinate(
+    LatLng coordinate,
+    CoordType fromType,
+  ) async {
     return platform(
       android: (pool) async {
         final context = await android_app_Activity.get();
 
         // 待转换坐标
-        final targetCoord = await com_amap_api_maps_model_LatLng
-            .create__double__double(coord.latitude, coord.longitude);
+        final targetCoordinate = await com_amap_api_maps_model_LatLng
+            .create__double__double(coordinate.latitude, coordinate.longitude);
 
         // 转换器
         final converter = await com_amap_api_maps_CoordinateConverter
@@ -144,22 +201,26 @@ class AmapService {
             break;
         }
 
-        await converter.coord(targetCoord);
+        await converter.coord(targetCoordinate);
 
         final result = await converter.convert();
 
         // 释放两个点
-        pool..add(targetCoord)..add(context)..add(converter)..add(result);
+        pool
+          ..add(targetCoordinate)
+          ..add(context)
+          ..add(converter)
+          ..add(result);
 
         return LatLng(
-          await result.get_latitude(),
-          await result.get_longitude(),
+          await result!.get_latitude() ?? 0,
+          await result.get_longitude() ?? 0,
         );
       },
       ios: (pool) async {
         // 待转换坐标
         final targetCoord = await CLLocationCoordinate2D.create(
-            coord.latitude, coord.longitude);
+            coordinate.latitude, coordinate.longitude);
 
         AMapCoordinateType type;
         switch (fromType) {
@@ -189,14 +250,16 @@ class AmapService {
         final result = await AMapCoordinateConvert(targetCoord, type);
 
         // 释放两个点相关的数据
-        pool..add(targetCoord)..add(result);
+        pool
+          ..add(targetCoord)
+          ..add(result);
 
-        return LatLng(await result.latitude, await result.longitude);
+        return LatLng(await result!.latitude ?? 0, await result.longitude ?? 0);
       },
     );
   }
 
-  /// 计算面积 (iOS未完成)
+  /// 计算面积
   ///
   /// 计算指定左上角[leftTop]和右下角[rightBottom]的矩形的面积
   Future<double> calculateArea(
@@ -219,28 +282,30 @@ class AmapService {
                 _location1, _location2);
 
         // 释放两个点
-        pool..add(_location1)..add(_location2);
+        pool
+          ..add(_location1)
+          ..add(_location2);
 
-        return result;
+        return result ?? 0;
       },
       ios: (pool) async {
         // 点1
         final _location1 = await CLLocationCoordinate2D.create(
             leftTop.latitude, leftTop.longitude);
-        final mapPoint1 = await MAMapPointForCoordinate(_location1);
 
         // 点2
         final _location2 = await CLLocationCoordinate2D.create(
             rightBottom.latitude, rightBottom.longitude);
-        final mapPoint2 = await MAMapPointForCoordinate(_location2);
 
         // 计算结果
-        final result = await MAMetersBetweenMapPoints(mapPoint1, mapPoint2);
+        final result = await MAAreaBetweenCoordinates(_location1, _location2);
 
         // 释放两个点相关的数据
-        pool..add(_location1)..add(_location2)..add(mapPoint1)..add(mapPoint2);
+        pool
+          ..add(_location1)
+          ..add(_location2);
 
-        return result;
+        return result ?? 0;
       },
     );
   }
@@ -258,8 +323,8 @@ class AmapService {
       android: (_) async {
         final urlScheme =
             'androidamap://navi?sourceApplication=$appName&lat=${target.latitude}&lon=${target.longitude}&dev=$dev&style=2';
-        if (await canLaunch(urlScheme)) {
-          return launch(urlScheme);
+        if (await canLaunchUrlString(urlScheme)) {
+          await launchUrlString(urlScheme);
         } else {
           return Future.error('无法调起高德地图');
         }
@@ -267,8 +332,8 @@ class AmapService {
       ios: (_) async {
         final urlScheme =
             'iosamap://navi?sourceApplication=$appName&lat=${target.latitude}&lon=${target.longitude}&dev=$dev&style=2';
-        if (await canLaunch(urlScheme)) {
-          return launch(urlScheme);
+        if (await canLaunchUrlString(urlScheme)) {
+          await launchUrlString(urlScheme);
         } else {
           return Future.error('无法调起高德地图');
         }
@@ -288,8 +353,8 @@ class AmapService {
   }) async {
     final urlScheme =
         'amapuri://openFeature?featureName=OnRideNavi&rideType=${rideType.inString()}&sourceApplication=$appName&lat=${target.latitude}&lon=${target.longitude}&dev=$dev';
-    if (await canLaunch(urlScheme)) {
-      return launch(urlScheme);
+    if (await canLaunchUrlString(urlScheme)) {
+      await launchUrlString(urlScheme);
     } else {
       return Future.error('无法调起高德地图');
     }
@@ -302,57 +367,56 @@ class AmapService {
   Future<void> queryProcessedTrace(
     int traceId,
     List<TraceLocation> locationList, {
-    OnTraceProcessing onTraceProcessing,
-    OnTraceFinished onTraceFinished,
-    OnTraceFailed onTraceFailed,
+    OnTraceProcessing? onTraceProcessing,
+    OnTraceFinished? onTraceFinished,
+    OnTraceFailed? onTraceFailed,
   }) async {
-    assert(locationList != null);
     assert(locationList.length > 1);
-    return platform(
-      android: (pool) async {
-        // 获取上下文
-        final applicationContext = await android_app_Application.get();
-        // 创建轨迹对象
-        final traceClient = await com_amap_api_trace_LBSTraceClient
-            .create__android_content_Context(applicationContext);
-
-        // 开始对轨迹纠偏
-        await traceClient.queryProcessedTrace(
-          traceId,
-          await locationList.toAndroidModel(),
-          com_amap_api_trace_LBSTraceClient.TYPE_AMAP,
-          _traceListener
-            .._onTraceProcessing = onTraceProcessing
-            .._onTraceFinished = onTraceFinished
-            .._onTraceFailed = onTraceFailed,
-        );
-      },
-      ios: (pool) async {
-        final traceManager = await MATraceManager.create__();
-
-        await traceManager
-            .queryProcessedTraceWith_type_processingCallback_finishCallback_failedCallback(
-          await locationList.toIOSModel(),
-          AMapCoordinateType.AMapCoordinateTypeAMap,
-          (int index, List<MATracePoint> points) async {
-            if (onTraceProcessing != null) {
-              await onTraceProcessing(index, await points.toDartModel());
-            }
-          },
-          (List<MATracePoint> points, double distance) async {
-            if (onTraceFinished != null) {
-              await onTraceFinished(
-                  await points.toDartModel(), distance.toInt());
-            }
-          },
-          (int errorCode, String errorDesc) {
-            if (onTraceFailed != null) {
-              onTraceFailed(errorCode, errorDesc);
-            }
-          },
-        );
-      },
-    );
+    // return platform(
+    //   android: (pool) async {
+    //     // 获取上下文
+    //     final applicationContext = await android_app_Application.get();
+    //     // 创建轨迹对象
+    //     final traceClient = await com_amap_api_trace_LBSTraceClient
+    //         .create__android_content_Context(applicationContext);
+    //
+    //     // 开始对轨迹纠偏
+    //     await traceClient.queryProcessedTrace(
+    //       traceId,
+    //       await locationList.toAndroidModel(),
+    //       com_amap_api_trace_LBSTraceClient.TYPE_AMAP,
+    //       _traceListener
+    //         .._onTraceProcessing = onTraceProcessing
+    //         .._onTraceFinished = onTraceFinished
+    //         .._onTraceFailed = onTraceFailed,
+    //     );
+    //   },
+    //   ios: (pool) async {
+    //     final traceManager = await MATraceManager.create__();
+    //
+    //     await traceManager
+    //         .queryProcessedTraceWith_type_processingCallback_finishCallback_failedCallback(
+    //       await locationList.toIOSModel(),
+    //       AMapCoordinateType.AMapCoordinateTypeAMap,
+    //       (int index, List<MATracePoint> points) async {
+    //         if (onTraceProcessing != null) {
+    //           await onTraceProcessing(index, await points.toDartModel());
+    //         }
+    //       },
+    //       (List<MATracePoint> points, double distance) async {
+    //         if (onTraceFinished != null) {
+    //           await onTraceFinished(
+    //               await points.toDartModel(), distance.toInt());
+    //         }
+    //       },
+    //       (int errorCode, String errorDesc) {
+    //         if (onTraceFailed != null) {
+    //           onTraceFailed(errorCode, errorDesc);
+    //         }
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   /// 打开离线地图管理器
@@ -374,7 +438,6 @@ class AmapService {
     int zoomLevel = 10,
     Size size = const Size(400, 400),
   }) async {
-    assert(coordinate != null);
     final url =
         'https://restapi.amap.com/v3/staticmap?location=${coordinate.longitude},${coordinate.latitude}&zoom=$zoomLevel&key=$_webKey&size=${size.width.toInt()}*${size.height.toInt()}';
 
@@ -385,44 +448,94 @@ class AmapService {
     var response = await request.close();
     return consolidateHttpClientResponseBytes(response);
   }
+
+  /// 轨迹平滑处理
+  Future<List<LatLng>> pathSmooth(
+    List<LatLng> coordinateList, {
+    int intensity = 3,
+    double threshold = 0.3,
+  }) async {
+    if (coordinateList.isEmpty) return [];
+
+    final latitudeBatch = coordinateList.map((e) => e.latitude).toList();
+    final longitudeBatch = coordinateList.map((e) => e.longitude).toList();
+
+    return platform(
+      android: (pool) async {
+        final pathSmooth =
+            await com_amap_api_maps_utils_PathSmoothTool.create__();
+        await pathSmooth.setIntensity(intensity);
+        await pathSmooth.setThreshhold(threshold);
+        final result = await pathSmooth.pathOptimize(
+            await com_amap_api_maps_model_LatLng.create_batch__double__double(
+                latitudeBatch, longitudeBatch));
+
+        final resultLatitudeBatch = await result.get_latitude_batch();
+        final resultLongitudeBatch = await result.get_longitude_batch();
+        return [
+          for (int i = 0; i < result.length; i++)
+            LatLng(resultLatitudeBatch[i] ?? 0, resultLongitudeBatch[i] ?? 0)
+        ];
+      },
+      ios: (pool) async {
+        final pathSmooth = await MASmoothPathTool.create__();
+        await pathSmooth.set_intensity(intensity);
+        await pathSmooth.set_threshHold(threshold);
+
+        final pointBatch =
+            await MALonLatPoint.create_batch__(coordinateList.length);
+        await pointBatch.set_lat_batch(latitudeBatch);
+        await pointBatch.set_lon_batch(longitudeBatch);
+
+        final result = await pathSmooth.pathOptimize(pointBatch);
+
+        final resultLatitudeBatch = await result.get_lat_batch();
+        final resultLongitudeBatch = await result.get_lon_batch();
+        return [
+          for (int i = 0; i < result.length; i++)
+            LatLng(resultLatitudeBatch[i], resultLongitudeBatch[i])
+        ];
+      },
+    );
+  }
 }
-
-class _TraceListener extends java_lang_Object
-    with com_amap_api_trace_TraceListener {
-  OnTraceProcessing _onTraceProcessing;
-  OnTraceFinished _onTraceFinished;
-  OnTraceFailed _onTraceFailed;
-
-  @override
-  Future<void> onTraceProcessing(
-    int lineID,
-    int index,
-    List<com_amap_api_maps_model_LatLng> segments,
-  ) async {
-    await super.onTraceProcessing(lineID, index, segments);
-    if (_onTraceProcessing != null) {
-      await _onTraceProcessing(index, await segments.toDartModel());
-    }
-  }
-
-  @override
-  Future<void> onFinished(
-    int lineID,
-    List<com_amap_api_maps_model_LatLng> linepoints,
-    int distance,
-    int waitingtime,
-  ) async {
-    await super.onFinished(lineID, linepoints, distance, waitingtime);
-    if (_onTraceFinished != null) {
-      await _onTraceFinished(await linepoints.toDartModel(), distance);
-    }
-  }
-
-  @override
-  Future<void> onRequestFailed(int lineID, String errorInfo) async {
-    await super.onRequestFailed(lineID, errorInfo);
-    if (_onTraceFailed != null) {
-      await _onTraceFailed(lineID, errorInfo);
-    }
-  }
-}
+//
+// class _TraceListener extends java_lang_Object
+//     with com_amap_api_trace_TraceListener {
+//   OnTraceProcessing _onTraceProcessing;
+//   OnTraceFinished _onTraceFinished;
+//   OnTraceFailed _onTraceFailed;
+//
+//   @override
+//   Future<void> onTraceProcessing(
+//     int lineID,
+//     int index,
+//     List<com_amap_api_maps_model_LatLng> segments,
+//   ) async {
+//     await super.onTraceProcessing(lineID, index, segments);
+//     if (_onTraceProcessing != null) {
+//       await _onTraceProcessing(index, await segments.toDartModel());
+//     }
+//   }
+//
+//   @override
+//   Future<void> onFinished(
+//     int lineID,
+//     List<com_amap_api_maps_model_LatLng> linepoints,
+//     int distance,
+//     int waitingtime,
+//   ) async {
+//     await super.onFinished(lineID, linepoints, distance, waitingtime);
+//     if (_onTraceFinished != null) {
+//       await _onTraceFinished(await linepoints.toDartModel(), distance);
+//     }
+//   }
+//
+//   @override
+//   Future<void> onRequestFailed(int lineID, String errorInfo) async {
+//     await super.onRequestFailed(lineID, errorInfo);
+//     if (_onTraceFailed != null) {
+//       await _onTraceFailed(lineID, errorInfo);
+//     }
+//   }
+// }

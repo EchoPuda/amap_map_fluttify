@@ -11,8 +11,11 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-class com_amap_api_maps_model_MultiPointOverlayOptions extends java_lang_Object  {
+class com_amap_api_maps_model_MultiPointOverlayOptions extends com_amap_api_maps_model_BaseOptions  {
   //region constants
   static const String name__ = 'com.amap.api.maps.model.MultiPointOverlayOptions';
 
@@ -24,19 +27,24 @@ class com_amap_api_maps_model_MultiPointOverlayOptions extends java_lang_Object 
 
   //region creators
   static Future<com_amap_api_maps_model_MultiPointOverlayOptions> create__() async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_model_MultiPointOverlayOptions__', );
-    final object = com_amap_api_maps_model_MultiPointOverlayOptions()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_MultiPointOverlayOptions__',
+    
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__)!;
   }
   
   static Future<List<com_amap_api_maps_model_MultiPointOverlayOptions>> create_batch__(int length) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_model_MultiPointOverlayOptions__', {'length': length});
-  
-    final List<com_amap_api_maps_model_MultiPointOverlayOptions> typedResult = resultBatch.map((result) => com_amap_api_maps_model_MultiPointOverlayOptions()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_MultiPointOverlayOptions__',
+      {'length': length}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_MultiPointOverlayOptions>()
+        .toList() ?? <com_amap_api_maps_model_MultiPointOverlayOptions>[];
   }
   
   //endregion
@@ -51,118 +59,156 @@ class com_amap_api_maps_model_MultiPointOverlayOptions extends java_lang_Object 
 
   //region methods
   
-  Future<com_amap_api_maps_model_MultiPointOverlayOptions> anchor(double var1, double var2) async {
+  Future<com_amap_api_maps_model_MultiPointOverlayOptions?> anchor(double? var1, double? var2) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::anchor([\'var1\':$var1, \'var2\':$var2])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::anchor', {"var1": var1, "var2": var2, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::anchor', {"var1": var1, "var2": var2, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = com_amap_api_maps_model_MultiPointOverlayOptions()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__);
   }
   
   
-  Future<double> getAnchorU() async {
+  Future<double?> getAnchorU() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::getAnchorU([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorU', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorU', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<double> getAnchorV() async {
+  Future<double?> getAnchorV() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::getAnchorV([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorV', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorV', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<com_amap_api_maps_model_MultiPointOverlayOptions> icon(com_amap_api_maps_model_BitmapDescriptor var1) async {
+  Future<com_amap_api_maps_model_MultiPointOverlayOptions?> icon(com_amap_api_maps_model_BitmapDescriptor? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::icon([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::icon', {"var1": var1, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::icon', {"var1": var1, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = com_amap_api_maps_model_MultiPointOverlayOptions()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__);
   }
   
   
-  Future<com_amap_api_maps_model_BitmapDescriptor> getIcon() async {
+  Future<com_amap_api_maps_model_BitmapDescriptor?> getIcon() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::getIcon([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getIcon', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getIcon', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = com_amap_api_maps_model_BitmapDescriptor()..refId = __result__;
-      return __return__;
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_BitmapDescriptor>(__result__);
+  }
+  
+  
+  Future<void> setMultiPointItems(List<com_amap_api_maps_model_MultiPointItem>? var1) async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::setMultiPointItems([])');
     }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::setMultiPointItems', {"var1": var1, "__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return __result__;
+  }
+  
+  
+  Future<List<com_amap_api_maps_model_MultiPointItem>?> getMultiPointItems() async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::getMultiPointItems([])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getMultiPointItems', {"__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointItem>(it)).where((e) => e != null).cast<com_amap_api_maps_model_MultiPointItem>().toList();
+  }
+  
+  
+  Future<void> setEnable(bool? var1) async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::setEnable([\'var1\':$var1])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::setEnable', {"var1": var1, "__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return __result__;
+  }
+  
+  
+  Future<com_amap_api_maps_model_MultiPointOverlayOptions?> clone() async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: com.amap.api.maps.model.MultiPointOverlayOptions@$refId::clone([])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::clone', {"__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__);
   }
   
   //endregion
@@ -173,7 +219,12 @@ class com_amap_api_maps_model_MultiPointOverlayOptions extends java_lang_Object 
   }
 }
 
-extension com_amap_api_maps_model_MultiPointOverlayOptions_Batch on List<com_amap_api_maps_model_MultiPointOverlayOptions> {
+extension com_amap_api_maps_model_MultiPointOverlayOptions_Batch on List<com_amap_api_maps_model_MultiPointOverlayOptions?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
@@ -184,98 +235,102 @@ extension com_amap_api_maps_model_MultiPointOverlayOptions_Batch on List<com_ama
 
   //region methods
   
-  Future<List<com_amap_api_maps_model_MultiPointOverlayOptions>> anchor_batch(List<double> var1, List<double> var2) async {
-    if (var1.length != var2.length) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<com_amap_api_maps_model_MultiPointOverlayOptions?>> anchor_batch(List<double?> var1, List<double?> var2) async {
+    assert(var1.length == var2.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::anchor_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "var2": var2[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::anchor_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => com_amap_api_maps_model_MultiPointOverlayOptions()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__)).cast<com_amap_api_maps_model_MultiPointOverlayOptions?>().toList();
   }
   
   
-  Future<List<double>> getAnchorU_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<double?>> getAnchorU_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorU_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorU_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
   
-  Future<List<double>> getAnchorV_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<double?>> getAnchorV_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorV_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getAnchorV_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
   
-  Future<List<com_amap_api_maps_model_MultiPointOverlayOptions>> icon_batch(List<com_amap_api_maps_model_BitmapDescriptor> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<com_amap_api_maps_model_MultiPointOverlayOptions?>> icon_batch(List<com_amap_api_maps_model_BitmapDescriptor?> var1) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::icon_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::icon_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => com_amap_api_maps_model_MultiPointOverlayOptions()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__)).cast<com_amap_api_maps_model_MultiPointOverlayOptions?>().toList();
   }
   
   
-  Future<List<com_amap_api_maps_model_BitmapDescriptor>> getIcon_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<com_amap_api_maps_model_BitmapDescriptor?>> getIcon_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getIcon_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getIcon_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => com_amap_api_maps_model_BitmapDescriptor()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_BitmapDescriptor>(__result__)).cast<com_amap_api_maps_model_BitmapDescriptor?>().toList();
+  }
+  
+  
+  Future<List<void>> setMultiPointItems_batch(List<List<com_amap_api_maps_model_MultiPointItem>?> var1) async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::setMultiPointItems_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
+  }
+  
+  
+  Future<List<List<com_amap_api_maps_model_MultiPointItem>?>> getMultiPointItems_batch() async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::getMultiPointItems_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => (__result__ as List?)?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointItem>(it)).where((e) => e != null).cast<com_amap_api_maps_model_MultiPointItem>().toList()).cast<List<com_amap_api_maps_model_MultiPointItem>?>().toList();
+  }
+  
+  
+  Future<List<void>> setEnable_batch(List<bool?> var1) async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::setEnable_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"var1": var1[__i__], "__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
+  }
+  
+  
+  Future<List<com_amap_api_maps_model_MultiPointOverlayOptions?>> clone_batch() async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.model.MultiPointOverlayOptions::clone_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_MultiPointOverlayOptions>(__result__)).cast<com_amap_api_maps_model_MultiPointOverlayOptions?>().toList();
   }
   
   //endregion

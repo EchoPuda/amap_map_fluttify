@@ -4,11 +4,15 @@
 
 #import "SubHandler2.h"
 #import "FluttifyMessageCodec.h"
+#import <MAMapKit/MAMapKit.h>
+#import "MATraceDelegate_Anonymous.h"
+#import "MAMultiPointOverlayRendererDelegate_Anonymous.h"
+#import "MAMapViewDelegate_Anonymous.h"
 
 // Dart端一次方法调用所存在的栈, 只有当MethodChannel传递参数受限时, 再启用这个容器
 extern NSMutableDictionary<NSString*, NSObject*>* STACK;
 // Dart端随机存取对象的容器
-extern NSMutableDictionary<NSNumber*, NSObject*>* HEAP;
+extern NSMutableDictionary<NSString*, NSObject*>* HEAP;
 // 日志打印开关
 extern BOOL enableLog;
 
@@ -16,452 +20,24 @@ extern BOOL enableLog;
 - (NSDictionary<NSString*, Handler>*) getSubHandler2 {
     __weak __typeof(self)weakSelf = self;
     return @{
-        @"MACircle::get_coordinate": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+        @"MAHeatMapVectorGridOverlay::get_option": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
             // print log
             if (enableLog) {
-                NSLog(@"MACircle::get_coordinate");
+                NSLog(@"MAHeatMapVectorGridOverlay::get_option");
             }
         
             // ref object
-            MACircle* ref = (MACircle*) args[@"__this__"];
-        
-            // invoke native method
-            CLLocationCoordinate2D result = ref.coordinate;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CLLocationCoordinate2D)];
-        
-            methodResult(__result__);
-        },
-        
-        @"MACircle::get_radius": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MACircle::get_radius");
+            MAHeatMapVectorGridOverlay* ref = (MAHeatMapVectorGridOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
             }
         
-            // ref object
-            MACircle* ref = (MACircle*) args[@"__this__"];
-        
             // invoke native method
-            CLLocationDistance result = ref.radius;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MACircle::get_boundingMapRect": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MACircle::get_boundingMapRect");
-            }
-        
-            // ref object
-            MACircle* ref = (MACircle*) args[@"__this__"];
-        
-            // invoke native method
-            MAMapRect result = ref.boundingMapRect;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(MAMapRect)];
-        
-            methodResult(__result__);
-        },
-        
-        @"MAArcRenderer::get_arc": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAArcRenderer::get_arc");
-            }
-        
-            // ref object
-            MAArcRenderer* ref = (MAArcRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            MAArc* result = ref.arc;
+            MAHeatMapVectorGridOverlayOptions* result = ref.option;
         
             // return a ref
             NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAAnnotation::get_coordinate": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAAnnotation::get_coordinate");
-            }
-        
-            // ref object
-            id<MAAnnotation> ref = (id<MAAnnotation>) args[@"__this__"];
-        
-            // invoke native method
-            CLLocationCoordinate2D result = ref.coordinate;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CLLocationCoordinate2D)];
-        
-            methodResult(__result__);
-        },
-        
-        @"MAAnnotation::get_title": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAAnnotation::get_title");
-            }
-        
-            // ref object
-            id<MAAnnotation> ref = (id<MAAnnotation>) args[@"__this__"];
-        
-            // invoke native method
-            NSString* result = ref.title;
-        
-            // 返回值: jsonable
-            id __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAAnnotation::get_subtitle": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAAnnotation::get_subtitle");
-            }
-        
-            // ref object
-            id<MAAnnotation> ref = (id<MAAnnotation>) args[@"__this__"];
-        
-            // invoke native method
-            NSString* result = ref.subtitle;
-        
-            // 返回值: jsonable
-            id __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAOfflineMapViewController::get_offlineMap": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAOfflineMapViewController::get_offlineMap");
-            }
-        
-            // ref object
-            MAOfflineMapViewController* ref = (MAOfflineMapViewController*) args[@"__this__"];
-        
-            // invoke native method
-            MAOfflineMap* result = ref.offlineMap;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMapCustomStyleOptions::get_styleData": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMapCustomStyleOptions::get_styleData");
-            }
-        
-            // ref object
-            MAMapCustomStyleOptions* ref = (MAMapCustomStyleOptions*) args[@"__this__"];
-        
-            // invoke native method
-            NSData* result = ref.styleData;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMapCustomStyleOptions::get_styleDataOverseaPath": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMapCustomStyleOptions::get_styleDataOverseaPath");
-            }
-        
-            // ref object
-            MAMapCustomStyleOptions* ref = (MAMapCustomStyleOptions*) args[@"__this__"];
-        
-            // invoke native method
-            NSString* result = ref.styleDataOverseaPath;
-        
-            // 返回值: jsonable
-            id __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMapCustomStyleOptions::get_styleId": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMapCustomStyleOptions::get_styleId");
-            }
-        
-            // ref object
-            MAMapCustomStyleOptions* ref = (MAMapCustomStyleOptions*) args[@"__this__"];
-        
-            // invoke native method
-            NSString* result = ref.styleId;
-        
-            // 返回值: jsonable
-            id __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMapCustomStyleOptions::get_styleTextureData": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMapCustomStyleOptions::get_styleTextureData");
-            }
-        
-            // ref object
-            MAMapCustomStyleOptions* ref = (MAMapCustomStyleOptions*) args[@"__this__"];
-        
-            // invoke native method
-            NSData* result = ref.styleTextureData;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMapCustomStyleOptions::get_styleExtraData": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMapCustomStyleOptions::get_styleExtraData");
-            }
-        
-            // ref object
-            MAMapCustomStyleOptions* ref = (MAMapCustomStyleOptions*) args[@"__this__"];
-        
-            // invoke native method
-            NSData* result = ref.styleExtraData;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAParticleOverlay::get_overlayOption": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAParticleOverlay::get_overlayOption");
-            }
-        
-            // ref object
-            MAParticleOverlay* ref = (MAParticleOverlay*) args[@"__this__"];
-        
-            // invoke native method
-            MAParticleOverlayOptions* result = ref.overlayOption;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiColoredPolylineRenderer::get_multiPolyline": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiColoredPolylineRenderer::get_multiPolyline");
-            }
-        
-            // ref object
-            MAMultiColoredPolylineRenderer* ref = (MAMultiColoredPolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            MAMultiPolyline* result = ref.multiPolyline;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiColoredPolylineRenderer::get_strokeColors": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiColoredPolylineRenderer::get_strokeColors");
-            }
-        
-            // ref object
-            MAMultiColoredPolylineRenderer* ref = (MAMultiColoredPolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            NSArray<UIColor*>* result = ref.strokeColors;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiColoredPolylineRenderer::get_isGradient": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiColoredPolylineRenderer::get_isGradient");
-            }
-        
-            // ref object
-            MAMultiColoredPolylineRenderer* ref = (MAMultiColoredPolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            BOOL result = ref.gradient;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MAAnimatedAnnotation::get_movingDirection": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAAnimatedAnnotation::get_movingDirection");
-            }
-        
-            // ref object
-            MAAnimatedAnnotation* ref = (MAAnimatedAnnotation*) args[@"__this__"];
-        
-            // invoke native method
-            CLLocationDirection result = ref.movingDirection;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MAOverlay::get_coordinate": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAOverlay::get_coordinate");
-            }
-        
-            // ref object
-            id<MAOverlay> ref = (id<MAOverlay>) args[@"__this__"];
-        
-            // invoke native method
-            CLLocationCoordinate2D result = ref.coordinate;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CLLocationCoordinate2D)];
-        
-            methodResult(__result__);
-        },
-        
-        @"MAOverlay::get_boundingMapRect": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAOverlay::get_boundingMapRect");
-            }
-        
-            // ref object
-            id<MAOverlay> ref = (id<MAOverlay>) args[@"__this__"];
-        
-            // invoke native method
-            MAMapRect result = ref.boundingMapRect;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(MAMapRect)];
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiTexturePolylineRenderer::get_multiPolyline": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiTexturePolylineRenderer::get_multiPolyline");
-            }
-        
-            // ref object
-            MAMultiTexturePolylineRenderer* ref = (MAMultiTexturePolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            MAMultiPolyline* result = ref.multiPolyline;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiTexturePolylineRenderer::get_strokeTextureImages": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiTexturePolylineRenderer::get_strokeTextureImages");
-            }
-        
-            // ref object
-            MAMultiTexturePolylineRenderer* ref = (MAMultiTexturePolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            NSArray* result = ref.strokeTextureImages;
-        
-            // return a ref
-            NSObject* __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiTexturePolylineRenderer::get_strokeTextureIDs": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiTexturePolylineRenderer::get_strokeTextureIDs");
-            }
-        
-            // ref object
-            MAMultiTexturePolylineRenderer* ref = (MAMultiTexturePolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            NSArray<NSNumber*>* result = ref.strokeTextureIDs;
-        
-            // 返回值: jsonable
-            id __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiTexturePolylineRenderer::get_showRangeEnabled": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiTexturePolylineRenderer::get_showRangeEnabled");
-            }
-        
-            // ref object
-            MAMultiTexturePolylineRenderer* ref = (MAMultiTexturePolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            BOOL result = ref.showRangeEnabled;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MAMultiTexturePolylineRenderer::get_showRange": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAMultiTexturePolylineRenderer::get_showRange");
-            }
-        
-            // ref object
-            MAMultiTexturePolylineRenderer* ref = (MAMultiTexturePolylineRenderer*) args[@"__this__"];
-        
-            // invoke native method
-            MAPathShowRange result = ref.showRange;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(MAPathShowRange)];
         
             methodResult(__result__);
         },
@@ -474,6 +50,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineProvince* ref = (MAOfflineProvince*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray* result = ref.cities;
@@ -492,6 +72,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayRender* ref = (MAHeatMapVectorOverlayRender*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAHeatMapVectorOverlay* result = ref.heatOverlay;
@@ -510,6 +94,10 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlayRenderer* ref = (MATileOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MATileOverlay* result = ref.tileOverlay;
@@ -528,6 +116,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.name;
@@ -546,6 +138,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.jianpin;
@@ -564,6 +160,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.pinyin;
@@ -582,6 +182,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.adcode;
@@ -600,6 +204,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             long long result = ref.size;
@@ -618,6 +226,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAOfflineItemStatus result = ref.itemStatus;
@@ -636,6 +248,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItem* ref = (MAOfflineItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             long long result = ref.downloadedSize;
@@ -654,6 +270,10 @@ extern BOOL enableLog;
         
             // ref object
             MATouchPoi* ref = (MATouchPoi*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.name;
@@ -672,6 +292,10 @@ extern BOOL enableLog;
         
             // ref object
             MATouchPoi* ref = (MATouchPoi*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.coordinate;
@@ -690,6 +314,10 @@ extern BOOL enableLog;
         
             // ref object
             MATouchPoi* ref = (MATouchPoi*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.uid;
@@ -740,6 +368,28 @@ extern BOOL enableLog;
             methodResult(__result__);
         },
         
+        @"MAHeatMapVectorGridOverlayRenderer::get_heatOverlay": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAHeatMapVectorGridOverlayRenderer::get_heatOverlay");
+            }
+        
+            // ref object
+            MAHeatMapVectorGridOverlayRenderer* ref = (MAHeatMapVectorGridOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            MAHeatMapVectorGridOverlay* result = ref.heatOverlay;
+        
+            // return a ref
+            NSObject* __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
         @"MAMultiPolyline::get_drawStyleIndexes": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
             // print log
             if (enableLog) {
@@ -748,6 +398,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPolyline* ref = (MAMultiPolyline*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<NSNumber*>* result = ref.drawStyleIndexes;
@@ -766,6 +420,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointOverlayRenderer* ref = (MAMultiPointOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIImage* result = ref.icon;
@@ -784,6 +442,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointOverlayRenderer* ref = (MAMultiPointOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGSize result = ref.pointSize;
@@ -802,6 +464,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointOverlayRenderer* ref = (MAMultiPointOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGPoint result = ref.anchor;
@@ -820,6 +486,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointOverlayRenderer* ref = (MAMultiPointOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAMultiPointOverlay* result = ref.multiPointOverlay;
@@ -838,6 +508,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorFloorInfo* ref = (MAIndoorFloorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.floorName;
@@ -856,6 +530,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorFloorInfo* ref = (MAIndoorFloorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             int result = ref.floorIndex;
@@ -874,6 +552,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorFloorInfo* ref = (MAIndoorFloorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.floorNona;
@@ -892,6 +574,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorFloorInfo* ref = (MAIndoorFloorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.isPark;
@@ -910,6 +596,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.cnName;
@@ -928,6 +618,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.enName;
@@ -946,6 +640,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.poiID;
@@ -964,6 +662,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.buildingType;
@@ -982,6 +684,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             int result = ref.activeFloorIndex;
@@ -1000,6 +706,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             int result = ref.activeFloorInfoIndex;
@@ -1018,6 +728,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray* result = ref.floorInfo;
@@ -1036,6 +750,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             int result = ref.numberOfFloor;
@@ -1054,6 +772,10 @@ extern BOOL enableLog;
         
             // ref object
             MAIndoorInfo* ref = (MAIndoorInfo*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             int result = ref.numberOfParkFloor;
@@ -1072,6 +794,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAPolyline* result = ref.polyline;
@@ -1090,6 +816,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.is3DArrowLine;
@@ -1108,6 +838,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.sideColor;
@@ -1126,6 +860,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.userInteractionEnabled;
@@ -1144,6 +882,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.hitTestInset;
@@ -1162,6 +904,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.showRangeEnabled;
@@ -1180,6 +926,10 @@ extern BOOL enableLog;
         
             // ref object
             MAPolylineRenderer* ref = (MAPolylineRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAPathShowRange result = ref.showRange;
@@ -1198,6 +948,10 @@ extern BOOL enableLog;
         
             // ref object
             MAShape* ref = (MAShape*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.title;
@@ -1216,6 +970,10 @@ extern BOOL enableLog;
         
             // ref object
             MAShape* ref = (MAShape*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.subtitle;
@@ -1234,6 +992,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.reuseIdentifier;
@@ -1252,6 +1014,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSInteger result = ref.zIndex;
@@ -1270,6 +1036,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             id<MAAnnotation> result = ref.annotation;
@@ -1288,9 +1058,35 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIImage* result = ref.image;
+        
+            // return a ref
+            NSObject* __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
+        @"MAAnnotationView::get_imageView": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAAnnotationView::get_imageView");
+            }
+        
+            // ref object
+            MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            UIImageView* result = ref.imageView;
         
             // return a ref
             NSObject* __result__ = result;
@@ -1306,6 +1102,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MACustomCalloutView* result = ref.customCalloutView;
@@ -1324,6 +1124,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGPoint result = ref.centerOffset;
@@ -1342,6 +1146,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGPoint result = ref.calloutOffset;
@@ -1360,6 +1168,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.enabled;
@@ -1378,6 +1190,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.highlighted;
@@ -1396,6 +1212,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.selected;
@@ -1414,6 +1234,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.canShowCallout;
@@ -1432,6 +1256,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIView* result = ref.leftCalloutAccessoryView;
@@ -1450,6 +1278,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIView* result = ref.rightCalloutAccessoryView;
@@ -1468,6 +1300,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.draggable;
@@ -1486,6 +1322,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAAnnotationViewDragState result = ref.dragState;
@@ -1504,6 +1344,10 @@ extern BOOL enableLog;
         
             // ref object
             MAAnnotationView* ref = (MAAnnotationView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.canAdjustPositon;
@@ -1522,6 +1366,10 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGSize result = ref.tileSize;
@@ -1540,6 +1388,10 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSInteger result = ref.minimumZ;
@@ -1558,6 +1410,10 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSInteger result = ref.maximumZ;
@@ -1576,6 +1432,10 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.URLTemplate;
@@ -1594,30 +1454,16 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.canReplaceMapContent;
         
             // 返回值: Value
             NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MATileOverlay::get_boundingMapRect": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MATileOverlay::get_boundingMapRect");
-            }
-        
-            // ref object
-            MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
-        
-            // invoke native method
-            MAMapRect result = ref.boundingMapRect;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(MAMapRect)];
         
             methodResult(__result__);
         },
@@ -1630,6 +1476,10 @@ extern BOOL enableLog;
         
             // ref object
             MATileOverlay* ref = (MATileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.disableOffScreenTileLoading;
@@ -1680,26 +1530,6 @@ extern BOOL enableLog;
             methodResult(__result__);
         },
         
-        @"MATileOverlayPath::get_z": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MATileOverlayPath::get_z");
-            }
-        
-            // ref object
-            NSValue* dataValue = (NSValue*) ((NSDictionary<NSString*, NSObject*>*) args)[@"__this__"];
-            MATileOverlayPath ref;
-            [dataValue getValue:&ref];
-        
-            // invoke native method
-            NSInteger result = ref.z;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
         @"MATileOverlayPath::get_contentScaleFactor": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
             // print log
             if (enableLog) {
@@ -1720,6 +1550,46 @@ extern BOOL enableLog;
             methodResult(__result__);
         },
         
+        @"MATileOverlayPath::get_index": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MATileOverlayPath::get_index");
+            }
+        
+            // ref object
+            NSValue* dataValue = (NSValue*) ((NSDictionary<NSString*, NSObject*>*) args)[@"__this__"];
+            MATileOverlayPath ref;
+            [dataValue getValue:&ref];
+        
+            // invoke native method
+            NSInteger result = ref.index;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MATileOverlayPath::get_requestId": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MATileOverlayPath::get_requestId");
+            }
+        
+            // ref object
+            NSValue* dataValue = (NSValue*) ((NSDictionary<NSString*, NSObject*>*) args)[@"__this__"];
+            MATileOverlayPath ref;
+            [dataValue getValue:&ref];
+        
+            // invoke native method
+            NSInteger result = ref.requestId;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
         @"MACustomCalloutView::get_customView": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
             // print log
             if (enableLog) {
@@ -1728,6 +1598,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomCalloutView* ref = (MACustomCalloutView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIView* result = ref.customView;
@@ -1746,6 +1620,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomCalloutView* ref = (MACustomCalloutView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSObject* result = ref.userData;
@@ -1764,6 +1642,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineItemCommonCity* ref = (MAOfflineItemCommonCity*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAOfflineItem* result = ref.province;
@@ -1782,6 +1664,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineMap* ref = (MAOfflineMap*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<MAOfflineProvince*>* result = ref.provinces;
@@ -1800,6 +1686,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineMap* ref = (MAOfflineMap*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<MAOfflineItemMunicipality*>* result = ref.municipalities;
@@ -1818,6 +1708,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineMap* ref = (MAOfflineMap*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAOfflineItemNationWide* result = ref.nationWide;
@@ -1836,6 +1730,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineMap* ref = (MAOfflineMap*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<MAOfflineCity*>* result = ref.cities;
@@ -1854,30 +1752,16 @@ extern BOOL enableLog;
         
             // ref object
             MAOfflineMap* ref = (MAOfflineMap*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.version;
         
             // 返回值: jsonable
             id __result__ = result;
-        
-            methodResult(__result__);
-        },
-        
-        @"MAOfflineMap::get_offlineCities": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAOfflineMap::get_offlineCities");
-            }
-        
-            // ref object
-            MAOfflineMap* ref = (MAOfflineMap*) args[@"__this__"];
-        
-            // invoke native method
-            NSArray* result = ref.offlineCities;
-        
-            // return a ref
-            NSObject* __result__ = result;
         
             methodResult(__result__);
         },
@@ -1890,6 +1774,10 @@ extern BOOL enableLog;
         
             // ref object
             MACircleRenderer* ref = (MACircleRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MACircle* result = ref.circle;
@@ -1908,6 +1796,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayRenderer* ref = (MAParticleOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAParticleOverlay* result = ref.particleOverlay;
@@ -2166,6 +2058,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.visibile;
@@ -2184,6 +2080,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSTimeInterval result = ref.duration;
@@ -2202,6 +2102,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.loop;
@@ -2220,6 +2124,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSInteger result = ref.maxParticles;
@@ -2238,6 +2146,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIImage* result = ref.icon;
@@ -2256,6 +2168,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGSize result = ref.startParticleSize;
@@ -2274,6 +2190,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSTimeInterval result = ref.particleLifeTime;
@@ -2292,6 +2212,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             id<MAParticleColorGenerate> result = ref.particleStartColor;
@@ -2310,6 +2234,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             id<MAParticleVelocityGenerate> result = ref.particleStartSpeed;
@@ -2328,9 +2256,13 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
-            MAParticleEmissionModule* result = ref.particleEmissionModule;
+            MAParticleEmissionModuleOC* result = ref.particleEmissionModule;
         
             // return a ref
             NSObject* __result__ = result;
@@ -2346,6 +2278,10 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             id<MAParticleShapeModule> result = ref.particleShapeModule;
@@ -2364,9 +2300,123 @@ extern BOOL enableLog;
         
             // ref object
             MAParticleOverlayOptions* ref = (MAParticleOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
-            MAParticleOverLifeModule* result = ref.particleOverLifeModule;
+            MAParticleOverLifeModuleOC* result = ref.particleOverLifeModule;
+        
+            // return a ref
+            NSObject* __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMVTTileOverlayOptions::get_url": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMVTTileOverlayOptions::get_url");
+            }
+        
+            // ref object
+            MAMVTTileOverlayOptions* ref = (MAMVTTileOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            NSString* result = ref.url;
+        
+            // 返回值: jsonable
+            id __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMVTTileOverlayOptions::get_key": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMVTTileOverlayOptions::get_key");
+            }
+        
+            // ref object
+            MAMVTTileOverlayOptions* ref = (MAMVTTileOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            NSString* result = ref.key;
+        
+            // 返回值: jsonable
+            id __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMVTTileOverlayOptions::get_Id": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMVTTileOverlayOptions::get_Id");
+            }
+        
+            // ref object
+            MAMVTTileOverlayOptions* ref = (MAMVTTileOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            NSString* result = ref.Id;
+        
+            // 返回值: jsonable
+            id __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMVTTileOverlayOptions::get_visible": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMVTTileOverlayOptions::get_visible");
+            }
+        
+            // ref object
+            MAMVTTileOverlayOptions* ref = (MAMVTTileOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.visible;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMVTTileOverlay::get_option": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMVTTileOverlay::get_option");
+            }
+        
+            // ref object
+            MAMVTTileOverlay* ref = (MAMVTTileOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            MAMVTTileOverlayOptions* result = ref.option;
         
             // return a ref
             NSObject* __result__ = result;
@@ -2382,6 +2432,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOverlayRenderer* ref = (MAOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             id<MAOverlay> result = ref.overlay;
@@ -2400,6 +2454,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOverlayRenderer* ref = (MAOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIImage* result = ref.strokeImage;
@@ -2418,6 +2476,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOverlayRenderer* ref = (MAOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             GLuint result = ref.strokeTextureID;
@@ -2436,6 +2498,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOverlayRenderer* ref = (MAOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.alpha;
@@ -2454,6 +2520,10 @@ extern BOOL enableLog;
         
             // ref object
             MAOverlayRenderer* ref = (MAOverlayRenderer*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.contentScale;
@@ -2472,6 +2542,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocation* ref = (MAUserLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.updating;
@@ -2490,6 +2564,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocation* ref = (MAUserLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocation* result = ref.location;
@@ -2508,6 +2586,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocation* ref = (MAUserLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLHeading* result = ref.heading;
@@ -2526,6 +2608,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorNode* ref = (MAHeatMapVectorNode*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.coordinate;
@@ -2544,6 +2630,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorNode* ref = (MAHeatMapVectorNode*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             float result = ref.weight;
@@ -2562,6 +2652,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorItem* ref = (MAHeatMapVectorItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAMapPoint result = ref.center;
@@ -2580,6 +2674,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorItem* ref = (MAHeatMapVectorItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             float result = ref.intensity;
@@ -2598,6 +2696,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorItem* ref = (MAHeatMapVectorItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<NSNumber*>* result = ref.nodeIndices;
@@ -2616,6 +2718,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAHeatMapType result = ref.type;
@@ -2634,6 +2740,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.visible;
@@ -2652,6 +2762,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<MAHeatMapVectorNode*>* result = ref.inputNodes;
@@ -2670,6 +2784,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationDistance result = ref.size;
@@ -2688,6 +2806,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.gap;
@@ -2706,6 +2828,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<UIColor*>* result = ref.colors;
@@ -2724,6 +2850,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<NSNumber*>* result = ref.startPoints;
@@ -2742,63 +2872,13 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.opacity;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MAHeatMapVectorOverlayOptions::get_maxIntensity": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAHeatMapVectorOverlayOptions::get_maxIntensity");
-            }
-        
-            // ref object
-            MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
-        
-            // invoke native method
-            int result = ref.maxIntensity;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MAHeatMapVectorOverlayOptions::get_minZoom": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAHeatMapVectorOverlayOptions::get_minZoom");
-            }
-        
-            // ref object
-            MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
-        
-            // invoke native method
-            CGFloat result = ref.minZoom;
-        
-            // 返回值: Value
-            NSObject* __result__ = @(result);
-        
-            methodResult(__result__);
-        },
-        
-        @"MAHeatMapVectorOverlayOptions::get_maxZoom": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAHeatMapVectorOverlayOptions::get_maxZoom");
-            }
-        
-            // ref object
-            MAHeatMapVectorOverlayOptions* ref = (MAHeatMapVectorOverlayOptions*) args[@"__this__"];
-        
-            // invoke native method
-            CGFloat result = ref.maxZoom;
         
             // 返回值: Value
             NSObject* __result__ = @(result);
@@ -2814,6 +2894,10 @@ extern BOOL enableLog;
         
             // ref object
             MAHeatMapVectorOverlay* ref = (MAHeatMapVectorOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAHeatMapVectorOverlayOptions* result = ref.option;
@@ -2832,6 +2916,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointItem* ref = (MAMultiPointItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.coordinate;
@@ -2850,6 +2938,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointItem* ref = (MAMultiPointItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.customID;
@@ -2868,6 +2960,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointItem* ref = (MAMultiPointItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.title;
@@ -2886,6 +2982,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointItem* ref = (MAMultiPointItem*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSString* result = ref.subtitle;
@@ -2904,6 +3004,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMultiPointOverlay* ref = (MAMultiPointOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<MAMultiPointItem*>* result = ref.items;
@@ -2922,6 +3026,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlayOption* ref = (MACustomBuildingOverlayOption*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.height;
@@ -2940,6 +3048,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlayOption* ref = (MACustomBuildingOverlayOption*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.heightScale;
@@ -2958,6 +3070,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlayOption* ref = (MACustomBuildingOverlayOption*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.topColor;
@@ -2976,6 +3092,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlayOption* ref = (MACustomBuildingOverlayOption*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.sideColor;
@@ -2994,6 +3114,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlayOption* ref = (MACustomBuildingOverlayOption*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.visibile;
@@ -3012,6 +3136,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlay* ref = (MACustomBuildingOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MACustomBuildingOverlayOption* result = ref.defaultOption;
@@ -3030,6 +3158,10 @@ extern BOOL enableLog;
         
             // ref object
             MACustomBuildingOverlay* ref = (MACustomBuildingOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             NSArray<MACustomBuildingOverlayOption*>* result = ref.customOptions;
@@ -3048,6 +3180,10 @@ extern BOOL enableLog;
         
             // ref object
             MATracePoint* ref = (MATracePoint*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationDegrees result = ref.latitude;
@@ -3066,6 +3202,10 @@ extern BOOL enableLog;
         
             // ref object
             MATracePoint* ref = (MATracePoint*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationDegrees result = ref.longitude;
@@ -3084,6 +3224,10 @@ extern BOOL enableLog;
         
             // ref object
             MATraceLocation* ref = (MATraceLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.loc;
@@ -3102,6 +3246,10 @@ extern BOOL enableLog;
         
             // ref object
             MATraceLocation* ref = (MATraceLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             double result = ref.angle;
@@ -3120,6 +3268,10 @@ extern BOOL enableLog;
         
             // ref object
             MATraceLocation* ref = (MATraceLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             double result = ref.speed;
@@ -3138,6 +3290,10 @@ extern BOOL enableLog;
         
             // ref object
             MATraceLocation* ref = (MATraceLocation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             double result = ref.time;
@@ -3156,6 +3312,10 @@ extern BOOL enableLog;
         
             // ref object
             MAArc* ref = (MAArc*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.startCoordinate;
@@ -3174,6 +3334,10 @@ extern BOOL enableLog;
         
             // ref object
             MAArc* ref = (MAArc*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.passedCoordinate;
@@ -3192,30 +3356,16 @@ extern BOOL enableLog;
         
             // ref object
             MAArc* ref = (MAArc*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.endCoordinate;
         
             // 返回值: 结构体
             NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CLLocationCoordinate2D)];
-        
-            methodResult(__result__);
-        },
-        
-        @"MAArc::get_boundingMapRect": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
-            // print log
-            if (enableLog) {
-                NSLog(@"MAArc::get_boundingMapRect");
-            }
-        
-            // ref object
-            MAArc* ref = (MAArc*) args[@"__this__"];
-        
-            // invoke native method
-            MAMapRect result = ref.boundingMapRect;
-        
-            // 返回值: 结构体
-            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(MAMapRect)];
         
             methodResult(__result__);
         },
@@ -3228,6 +3378,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.showsAccuracyRing;
@@ -3246,6 +3400,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.showsHeadingIndicator;
@@ -3264,6 +3422,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.fillColor;
@@ -3282,6 +3444,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.strokeColor;
@@ -3300,6 +3466,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.lineWidth;
@@ -3318,6 +3488,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.locationDotBgColor;
@@ -3336,6 +3510,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIColor* result = ref.locationDotFillColor;
@@ -3354,6 +3532,10 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.enablePulseAnnimation;
@@ -3372,12 +3554,104 @@ extern BOOL enableLog;
         
             // ref object
             MAUserLocationRepresentation* ref = (MAUserLocationRepresentation*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             UIImage* result = ref.image;
         
             // return a ref
             NSObject* __result__ = result;
+        
+            methodResult(__result__);
+        },
+        
+        @"MABaseOverlay::get_coordinate": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MABaseOverlay::get_coordinate");
+            }
+        
+            // ref object
+            MABaseOverlay* ref = (MABaseOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CLLocationCoordinate2D result = ref.coordinate;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CLLocationCoordinate2D)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MABaseOverlay::get_boundingMapRect": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MABaseOverlay::get_boundingMapRect");
+            }
+        
+            // ref object
+            MABaseOverlay* ref = (MABaseOverlay*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            MAMapRect result = ref.boundingMapRect;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(MAMapRect)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_metalEnabled": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_metalEnabled");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = [MAMapView metalEnabled];
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_terrainEnabled": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_terrainEnabled");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = [MAMapView terrainEnabled];
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
         
             methodResult(__result__);
         },
@@ -3390,6 +3664,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAMapType result = ref.mapType;
@@ -3408,6 +3686,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CLLocationCoordinate2D result = ref.centerCoordinate;
@@ -3426,6 +3708,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MACoordinateRegion result = ref.region;
@@ -3444,6 +3730,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAMapRect result = ref.visibleMapRect;
@@ -3462,6 +3752,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MACoordinateRegion result = ref.limitRegion;
@@ -3480,6 +3774,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             MAMapRect result = ref.limitMapRect;
@@ -3498,6 +3796,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.zoomLevel;
@@ -3516,6 +3818,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.minZoomLevel;
@@ -3534,6 +3840,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.maxZoomLevel;
@@ -3552,6 +3862,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.rotationDegree;
@@ -3570,6 +3884,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             CGFloat result = ref.cameraDegree;
@@ -3588,6 +3906,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.zoomingInPivotsAroundAnchorPoint;
@@ -3606,6 +3928,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.zoomEnabled;
@@ -3624,6 +3950,10 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.scrollEnabled;
@@ -3642,9 +3972,409 @@ extern BOOL enableLog;
         
             // ref object
             MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
         
             // invoke native method
             BOOL result = ref.rotateEnabled;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_isRotateCameraEnabled": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_isRotateCameraEnabled");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.rotateCameraEnabled;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_isShowsBuildings": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_isShowsBuildings");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.showsBuildings;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_isShowsLabels": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_isShowsLabels");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.showsLabels;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_isShowTraffic": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_isShowTraffic");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.showTraffic;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_touchPOIEnabled": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_touchPOIEnabled");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.touchPOIEnabled;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_showsCompass": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_showsCompass");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.showsCompass;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_compassOrigin": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_compassOrigin");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CGPoint result = ref.compassOrigin;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CGPoint)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_compassSize": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_compassSize");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CGSize result = ref.compassSize;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CGSize)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_showsScale": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_showsScale");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.showsScale;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_scaleOrigin": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_scaleOrigin");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CGPoint result = ref.scaleOrigin;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CGPoint)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_scaleSize": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_scaleSize");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CGSize result = ref.scaleSize;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CGSize)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_logoCenter": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_logoCenter");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CGPoint result = ref.logoCenter;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CGPoint)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_logoSize": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_logoSize");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            CGSize result = ref.logoSize;
+        
+            // 返回值: 结构体
+            NSValue* __result__ = [NSValue value:&result withObjCType:@encode(CGSize)];
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_metersPerPointForCurrentZoom": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_metersPerPointForCurrentZoom");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            double result = ref.metersPerPointForCurrentZoom;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_isAbroad": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_isAbroad");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.isAbroad;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_maxRenderFrame": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_maxRenderFrame");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            NSUInteger result = ref.maxRenderFrame;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_isAllowDecreaseFrame": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_isAllowDecreaseFrame");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.isAllowDecreaseFrame;
+        
+            // 返回值: Value
+            NSObject* __result__ = @(result);
+        
+            methodResult(__result__);
+        },
+        
+        @"MAMapView::get_openGLESDisabled": ^(NSObject <FlutterPluginRegistrar> * registrar, id args, FlutterResult methodResult) {
+            // print log
+            if (enableLog) {
+                NSLog(@"MAMapView::get_openGLESDisabled");
+            }
+        
+            // ref object
+            MAMapView* ref = (MAMapView*) args[@"__this__"];
+            if ((NSNull *) ref == [NSNull null] || ref == nil) {
+                methodResult([FlutterError errorWithCode:@"目标对象为nil" message:@"目标对象为nil" details:@"目标对象为nil"]);
+                return;
+            }
+        
+            // invoke native method
+            BOOL result = ref.openGLESDisabled;
         
             // 返回值: Value
             NSObject* __result__ = @(result);

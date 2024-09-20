@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_model_animation_TranslateAnimation extends com_amap_api_maps_model_animation_Animation  {
   //region constants
@@ -23,20 +26,25 @@ class com_amap_api_maps_model_animation_TranslateAnimation extends com_amap_api_
   //endregion
 
   //region creators
-  static Future<com_amap_api_maps_model_animation_TranslateAnimation> create__com_amap_api_maps_model_LatLng(com_amap_api_maps_model_LatLng var1) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_model_animation_TranslateAnimation__com_amap_api_maps_model_LatLng', {"var1": var1});
-    final object = com_amap_api_maps_model_animation_TranslateAnimation()..refId = refId;
-    return object;
+  static Future<com_amap_api_maps_model_animation_TranslateAnimation> create__com_amap_api_maps_model_LatLng(com_amap_api_maps_model_LatLng? var1) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_model_animation_TranslateAnimation__com_amap_api_maps_model_LatLng',
+      {"var1": var1}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_model_animation_TranslateAnimation>(__result__)!;
   }
   
-  static Future<List<com_amap_api_maps_model_animation_TranslateAnimation>> create_batch__com_amap_api_maps_model_LatLng(List<com_amap_api_maps_model_LatLng> var1) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_model_animation_TranslateAnimation__com_amap_api_maps_model_LatLng', [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__]}]);
-  
-    final List<com_amap_api_maps_model_animation_TranslateAnimation> typedResult = resultBatch.map((result) => com_amap_api_maps_model_animation_TranslateAnimation()..refId = result).toList();
-    return typedResult;
+  static Future<List<com_amap_api_maps_model_animation_TranslateAnimation>> create_batch__com_amap_api_maps_model_LatLng(List<com_amap_api_maps_model_LatLng?> var1) async {
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_model_animation_TranslateAnimation__com_amap_api_maps_model_LatLng',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_model_animation_TranslateAnimation>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_model_animation_TranslateAnimation>()
+        .toList() ?? <com_amap_api_maps_model_animation_TranslateAnimation>[];
   }
   
   //endregion
@@ -59,7 +67,12 @@ class com_amap_api_maps_model_animation_TranslateAnimation extends com_amap_api_
   }
 }
 
-extension com_amap_api_maps_model_animation_TranslateAnimation_Batch on List<com_amap_api_maps_model_animation_TranslateAnimation> {
+extension com_amap_api_maps_model_animation_TranslateAnimation_Batch on List<com_amap_api_maps_model_animation_TranslateAnimation?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

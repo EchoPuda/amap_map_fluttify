@@ -11,12 +11,49 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
-
+class _com_amap_api_maps_AMap_OnMapLoadedListener_SUB extends java_lang_Object with com_amap_api_maps_AMap_OnMapLoadedListener {}
 
 mixin com_amap_api_maps_AMap_OnMapLoadedListener on java_lang_Object {
   
 
+  static com_amap_api_maps_AMap_OnMapLoadedListener subInstance() => _com_amap_api_maps_AMap_OnMapLoadedListener_SUB();
+
+  static Future<com_amap_api_maps_AMap_OnMapLoadedListener> anonymous__() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.AMap.OnMapLoadedListener::createAnonymous__');
+  
+    final __object__ = AmapMapFluttifyAndroidAs<com_amap_api_maps_AMap_OnMapLoadedListener>(__result__)!;
+  
+    // handle callback
+    MethodChannel('com.amap.api.maps.AMap.OnMapLoadedListener::Callback@${__object__.refId}', kAmapMapFluttifyMethodCodec)
+        .setMethodCallHandler((methodCall) async {
+          try {
+            final args = methodCall.arguments as Map;
+            switch (methodCall.method) {
+              case 'onMapLoaded':
+                // print log
+                if (fluttifyLogEnabled) {
+                  debugPrint('fluttify-dart-callback: __object__.onMapLoaded?.call([])');
+                }
+            
+                // handle the native call
+                __object__.onMapLoaded?.call();
+                break;
+              default:
+                throw MissingPluginException('方法${methodCall.method}未实现');
+                break;
+            }
+          } catch (e) {
+            debugPrint(e.toString());
+            rethrow;
+          }
+        });
+  
+    return __object__;
+  }
   
 
   @override
@@ -26,8 +63,7 @@ mixin com_amap_api_maps_AMap_OnMapLoadedListener on java_lang_Object {
 
   
 
-  @mustCallSuper
-  Future<void> onMapLoaded() {}
+  Future<void> Function()? onMapLoaded;
   
 }
 

@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class MAOverlayRenderer extends NSObject  {
   //region constants
@@ -24,272 +27,270 @@ class MAOverlayRenderer extends NSObject  {
 
   //region creators
   static Future<MAOverlayRenderer> create__({ bool init = true /* ios only */ }) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createMAOverlayRenderer', {'init': init});
-    final object = MAOverlayRenderer()..refId = refId;
-    return object;
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createMAOverlayRenderer',
+      {'init': init}
+    );
+    return AmapMapFluttifyIOSAs<MAOverlayRenderer>(__result__)!;
   }
   
   static Future<List<MAOverlayRenderer>> create_batch__(int length, { bool init = true /* ios only */ }) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchMAOverlayRenderer', {'length': length, 'init': init});
-  
-    final List<MAOverlayRenderer> typedResult = resultBatch.map((result) => MAOverlayRenderer()..refId = result).toList();
-    return typedResult;
+    assert(true);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchMAOverlayRenderer',
+      {'length': length, 'init': init}
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyIOSAs<MAOverlayRenderer>(it))
+        .where((element) => element !=null)
+        .cast<MAOverlayRenderer>()
+        .toList() ?? <MAOverlayRenderer>[];
   }
   
   //endregion
 
   //region getters
-  Future<MAOverlay> get_overlay() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_overlay", {'__this__': this});
-    return __result__ == null ? null : (MAOverlay.subInstance()..refId = __result__);
+  Future<MAOverlay?> get_overlay() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_overlay", {'__this__': this});
+    return AmapMapFluttifyIOSAs<MAOverlay>(__result__);
   }
   
-  Future<UIImage> get_strokeImage() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_strokeImage", {'__this__': this});
-    return __result__ == null ? null : (UIImage()..refId = __result__);
+  Future<UIImage?> get_strokeImage() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_strokeImage", {'__this__': this});
+    return AmapMapFluttifyIOSAs<UIImage>(__result__);
   }
   
-  Future<int> get_strokeTextureID() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_strokeTextureID", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<int?> get_strokeTextureID() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_strokeTextureID", {'__this__': this});
+    return __result__;
   }
   
-  Future<double> get_alpha() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_alpha", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<double?> get_alpha() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_alpha", {'__this__': this});
+    return __result__;
   }
   
-  Future<double> get_contentScale() async {
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_contentScale", {'__this__': this});
-    return __result__ == null ? null : (__result__);
+  Future<double?> get_contentScale() async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_contentScale", {'__this__': this});
+    return __result__;
   }
   
   //endregion
 
   //region setters
-  Future<void> set_strokeImage(UIImage strokeImage) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::set_strokeImage', <String, dynamic>{'__this__': this, "strokeImage": strokeImage});
-  
-  
+  Future<void> set_strokeImage(UIImage? strokeImage) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::set_strokeImage', <String, dynamic>{'__this__': this, "strokeImage": strokeImage});
   }
   
-  Future<void> set_alpha(double alpha) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::set_alpha', <String, dynamic>{'__this__': this, "alpha": alpha});
-  
-  
+  Future<void> set_alpha(double? alpha) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::set_alpha', <String, dynamic>{'__this__': this, "alpha": alpha});
   }
   
   //endregion
 
   //region methods
   
-  Future<MAOverlayRenderer> initWithOverlay(MAOverlay overlay) async {
+  Future<MAOverlayRenderer?> initWithOverlay(MAOverlay? overlay) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::initWithOverlay([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::initWithOverlay', {"overlay": overlay, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::initWithOverlay', {"overlay": overlay, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = MAOverlayRenderer()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<MAOverlayRenderer>(__result__);
   }
   
   
-  Future<NSValue/* float* */> getViewMatrix() async {
+  Future<NSValue/* float* */?> getViewMatrix() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::getViewMatrix([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getViewMatrix', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getViewMatrix', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = NSValue/* float* */()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<NSValue/* float* */>(__result__);
   }
   
   
-  Future<NSValue/* float* */> getProjectionMatrix() async {
+  Future<NSValue/* float* */?> getProjectionMatrix() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::getProjectionMatrix([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getProjectionMatrix', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getProjectionMatrix', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = NSValue/* float* */()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<NSValue/* float* */>(__result__);
   }
   
   
-  Future<MAMapPoint> getOffsetPoint() async {
+  Future<MAMapPoint?> getOffsetPoint() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::getOffsetPoint([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getOffsetPoint', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getOffsetPoint', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = MAMapPoint()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<MAMapPoint>(__result__);
   }
   
   
-  Future<double> getMapZoomLevel() async {
+  Future<double?> getMapZoomLevel() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::getMapZoomLevel([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getMapZoomLevel', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getMapZoomLevel', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
   
-  Future<CGPoint> glPointForMapPoint(MAMapPoint mapPoint) async {
+  Future<CGPoint?> glPointForMapPoint(MAMapPoint? mapPoint) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::glPointForMapPoint([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::glPointForMapPoint', {"mapPoint": mapPoint, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glPointForMapPoint', {"mapPoint": mapPoint, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = CGPoint()..refId = __result__;
-      return __return__;
-    }
+    return AmapMapFluttifyIOSAs<CGPoint>(__result__);
   }
   
   
-  Future<List<CGPoint>> glPointsForMapPoints_count(List<MAMapPoint> mapPoints, int count) async {
+  Future<List<CGPoint>?> glPointsForMapPoints_count(List<MAMapPoint>? mapPoints, int? count) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::glPointsForMapPoints([\'count\':$count])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::glPointsForMapPoints_count', {"mapPoints": mapPoints, "count": count, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glPointsForMapPoints_count', {"mapPoints": mapPoints, "count": count, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = (__result__ as List).cast<String>().map((__it__) => CGPoint()..refId = __it__).toList();
-      return __return__;
-    }
+    return (__result__ as List?)?.map((it) => AmapMapFluttifyIOSAs<CGPoint>(it)).where((e) => e != null).cast<CGPoint>().toList();
   }
   
   
-  Future<double> glWidthForWindowWidth(double windowWidth) async {
+  Future<double?> glWidthForWindowWidth(double? windowWidth) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAOverlayRenderer@$refId::glWidthForWindowWidth([\'windowWidth\':$windowWidth])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::glWidthForWindowWidth', {"windowWidth": windowWidth, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glWidthForWindowWidth', {"windowWidth": windowWidth, "__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
-  @deprecated
-  Future<void> renderLinesWithPoints_pointCount_strokeColor_lineWidth_looped(List<CGPoint> points, int pointCount, UIColor strokeColor, double lineWidth, bool looped) async {
+  
+  Future<void> glRender() async {
     // print log
     if (fluttifyLogEnabled) {
-      debugPrint('fluttify-dart: MAOverlayRenderer@$refId::renderLinesWithPoints([\'pointCount\':$pointCount, \'lineWidth\':$lineWidth, \'looped\':$looped])');
+      debugPrint('fluttify-dart: MAOverlayRenderer@$refId::glRender([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::renderLinesWithPoints_pointCount_strokeColor_lineWidth_looped', {"points": points, "pointCount": pointCount, "strokeColor": strokeColor, "lineWidth": lineWidth, "looped": looped, "__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glRender', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
+    return __result__;
+  }
+  
+  
+  Future<int?> loadTexture(UIImage? textureImage) async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: MAOverlayRenderer@$refId::loadTexture([])');
     }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::loadTexture', {"textureImage": textureImage, "__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return __result__;
+  }
+  
+  
+  Future<void> deleteTexture(int? textureId) async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: MAOverlayRenderer@$refId::deleteTexture([\'textureId\':$textureId])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::deleteTexture', {"textureId": textureId, "__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return __result__;
+  }
+  
+  
+  Future<void> setNeedsUpdate() async {
+    // print log
+    if (fluttifyLogEnabled) {
+      debugPrint('fluttify-dart: MAOverlayRenderer@$refId::setNeedsUpdate([])');
+    }
+  
+    // invoke native method
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::setNeedsUpdate', {"__this__": this});
+  
+  
+    // handle native call
+  
+  
+    return __result__;
   }
   
   //endregion
@@ -300,54 +301,49 @@ class MAOverlayRenderer extends NSObject  {
   }
 }
 
-extension MAOverlayRenderer_Batch on List<MAOverlayRenderer> {
+extension MAOverlayRenderer_Batch on List<MAOverlayRenderer?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
-  Future<List<MAOverlay>> get_overlay_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_overlay_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAOverlay.subInstance()..refId = __result__).toList();
-    return typedResult;
+  Future<List<MAOverlay?>> get_overlay_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_overlay_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAOverlay>(__result__)).cast<MAOverlay?>().toList();
   }
   
-  Future<List<UIImage>> get_strokeImage_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_strokeImage_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<String>().map((__result__) => UIImage()..refId = __result__).toList();
-    return typedResult;
+  Future<List<UIImage?>> get_strokeImage_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_strokeImage_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<UIImage>(__result__)).cast<UIImage?>().toList();
   }
   
-  Future<List<int>> get_strokeTextureID_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_strokeTextureID_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<int>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<int?>> get_strokeTextureID_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_strokeTextureID_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
   }
   
-  Future<List<double>> get_alpha_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_alpha_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<double?>> get_alpha_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_alpha_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
-  Future<List<double>> get_contentScale_batch() async {
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod("MAOverlayRenderer::get_contentScale_batch", [for (final __item__ in this) {'__this__': __item__}]);
-  
-    final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-    return typedResult;
+  Future<List<double?>> get_contentScale_batch() async {
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod("MAOverlayRenderer::get_contentScale_batch", [for (final __item__ in this) {'__this__': __item__}]);
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
   //endregion
 
   //region setters
-  Future<void> set_strokeImage_batch(List<UIImage> strokeImage) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec())).invokeMethod('MAOverlayRenderer::set_strokeImage_batch', [for (int __i__ = 0; __i__ < length; __i__++) {'__this__': this[__i__], "strokeImage": strokeImage[__i__]}]);
+  Future<void> set_strokeImage_batch(List<UIImage?> strokeImage) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::set_strokeImage_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {'__this__': this[__i__], "strokeImage": strokeImage[__i__]}]);
   
   
   }
   
-  Future<void> set_alpha_batch(List<double> alpha) async {
-    await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec())).invokeMethod('MAOverlayRenderer::set_alpha_batch', [for (int __i__ = 0; __i__ < length; __i__++) {'__this__': this[__i__], "alpha": alpha[__i__]}]);
+  Future<void> set_alpha_batch(List<double?> alpha) async {
+    await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::set_alpha_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {'__this__': this[__i__], "alpha": alpha[__i__]}]);
   
   
   }
@@ -356,174 +352,135 @@ extension MAOverlayRenderer_Batch on List<MAOverlayRenderer> {
 
   //region methods
   
-  Future<List<MAOverlayRenderer>> initWithOverlay_batch(List<MAOverlay> overlay) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<MAOverlayRenderer?>> initWithOverlay_batch(List<MAOverlay?> overlay) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::initWithOverlay_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"overlay": overlay[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::initWithOverlay_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"overlay": overlay[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAOverlayRenderer()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAOverlayRenderer>(__result__)).cast<MAOverlayRenderer?>().toList();
   }
   
   
-  Future<List<NSValue/* float* */>> getViewMatrix_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<NSValue/* float* */?>> getViewMatrix_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getViewMatrix_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getViewMatrix_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => NSValue/* float* */()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<NSValue/* float* */>(__result__)).cast<NSValue/* float* */?>().toList();
   }
   
   
-  Future<List<NSValue/* float* */>> getProjectionMatrix_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<NSValue/* float* */?>> getProjectionMatrix_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getProjectionMatrix_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getProjectionMatrix_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => NSValue/* float* */()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<NSValue/* float* */>(__result__)).cast<NSValue/* float* */?>().toList();
   }
   
   
-  Future<List<MAMapPoint>> getOffsetPoint_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<MAMapPoint?>> getOffsetPoint_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getOffsetPoint_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getOffsetPoint_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => MAMapPoint()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<MAMapPoint>(__result__)).cast<MAMapPoint?>().toList();
   }
   
   
-  Future<List<double>> getMapZoomLevel_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<double?>> getMapZoomLevel_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::getMapZoomLevel_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::getMapZoomLevel_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
   
-  Future<List<CGPoint>> glPointForMapPoint_batch(List<MAMapPoint> mapPoint) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<CGPoint?>> glPointForMapPoint_batch(List<MAMapPoint?> mapPoint) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::glPointForMapPoint_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"mapPoint": mapPoint[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glPointForMapPoint_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"mapPoint": mapPoint[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => CGPoint()..refId = __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => AmapMapFluttifyIOSAs<CGPoint>(__result__)).cast<CGPoint?>().toList();
   }
   
   
-  Future<List<List<CGPoint>>> glPointsForMapPoints_count_batch(List<List<MAMapPoint>> mapPoints, List<int> count) async {
-    if (mapPoints.length != count.length) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<List<CGPoint>?>> glPointsForMapPoints_count_batch(List<List<MAMapPoint>?> mapPoints, List<int?> count) async {
+    assert(mapPoints.length == count.length);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::glPointsForMapPoints_count_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"mapPoints": mapPoints[__i__], "count": count[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glPointsForMapPoints_count_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"mapPoints": mapPoints[__i__], "count": count[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => (__result__ as List).cast<String>().map((__it__) => CGPoint()..refId = __it__).toList()).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => (__result__ as List?)?.map((it) => AmapMapFluttifyIOSAs<CGPoint>(it)).where((e) => e != null).cast<CGPoint>().toList()).cast<List<CGPoint>?>().toList();
   }
   
   
-  Future<List<double>> glWidthForWindowWidth_batch(List<double> windowWidth) async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<double?>> glWidthForWindowWidth_batch(List<double?> windowWidth) async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::glWidthForWindowWidth_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"windowWidth": windowWidth[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glWidthForWindowWidth_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"windowWidth": windowWidth[__i__], "__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
-  @deprecated
-  Future<List<void>> renderLinesWithPoints_pointCount_strokeColor_lineWidth_looped_batch(List<List<CGPoint>> points, List<int> pointCount, List<UIColor> strokeColor, List<double> lineWidth, List<bool> looped) async {
-    if (points.length != pointCount.length || pointCount.length != strokeColor.length || strokeColor.length != lineWidth.length || lineWidth.length != looped.length) {
-      return Future.error('all args must have same length!');
-    }
+  
+  Future<List<void>> glRender_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAOverlayRenderer::renderLinesWithPoints_pointCount_strokeColor_lineWidth_looped_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"points": points[__i__], "pointCount": pointCount[__i__], "strokeColor": strokeColor[__i__], "lineWidth": lineWidth[__i__], "looped": looped[__i__], "__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::glRender_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<String>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
+  }
+  
+  
+  Future<List<int?>> loadTexture_batch(List<UIImage?> textureImage) async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::loadTexture_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"textureImage": textureImage[__i__], "__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => __result__).cast<int?>().toList();
+  }
+  
+  
+  Future<List<void>> deleteTexture_batch(List<int?> textureId) async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::deleteTexture_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"textureId": textureId[__i__], "__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
+  }
+  
+  
+  Future<List<void>> setNeedsUpdate_batch() async {
+    assert(true);
+  
+    // invoke native method
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAOverlayRenderer::setNeedsUpdate_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
+  
+  
+    return (resultBatch as List).map((__result__) => __result__).cast<void>().toList();
   }
   
   //endregion

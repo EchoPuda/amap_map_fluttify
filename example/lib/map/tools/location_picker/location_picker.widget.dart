@@ -13,8 +13,8 @@ const _package = 'amap_all_fluttify';
 const _indicator = 'images/indicator.png';
 double _fabHeight = 16.0;
 
-typedef Future<bool> RequestPermission();
-typedef Widget PoiItemBuilder(Poi poi, bool selected);
+typedef RequestPermission = Future<bool> Function();
+typedef PoiItemBuilder = Widget Function(Poi poi, bool selected);
 
 class LocationPicker extends StatefulWidget {
   const LocationPicker({
@@ -105,11 +105,11 @@ class _LocationPickerState extends State<LocationPicker>
                       _jumpController
                           .forward()
                           .then((it) => _jumpController.reverse());
-                      _search(move.latLng);
+                      _search(move.coordinate);
                     }
                     _moveByUser = true;
                     // 保存当前地图中心点数据
-                    _currentCenterCoordinate = move.latLng;
+                    _currentCenterCoordinate = move.coordinate;
                   },
                   onMapCreated: (controller) async {
                     _controller = controller;

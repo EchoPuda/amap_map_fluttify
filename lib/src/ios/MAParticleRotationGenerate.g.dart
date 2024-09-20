@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class _MAParticleRotationGenerate_SUB extends NSObject with MAParticleRotationGenerate {}
 
@@ -18,6 +21,8 @@ mixin MAParticleRotationGenerate on NSObject {
   
 
   static MAParticleRotationGenerate subInstance() => _MAParticleRotationGenerate_SUB();
+
+  
 
   @override
   final String tag__ = 'amap_map_fluttify';
@@ -27,26 +32,20 @@ mixin MAParticleRotationGenerate on NSObject {
   
 
   
-  Future<double> getRotate() async {
+  Future<double?> getRotate() async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: MAParticleRotationGenerate@$refId::getRotate([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleRotationGenerate::getRotate', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('MAParticleRotationGenerate::getRotate', {"__this__": this});
   
   
     // handle native call
   
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+    return __result__;
   }
   
 }
@@ -54,22 +53,14 @@ mixin MAParticleRotationGenerate on NSObject {
 extension MAParticleRotationGenerate_Batch on List<MAParticleRotationGenerate> {
   //region methods
   
-  Future<List<double>> getRotate_batch() async {
-    if (false) {
-      return Future.error('all args must have same length!');
-    }
+  Future<List<double?>> getRotate_batch() async {
+    assert(true);
   
     // invoke native method
-    final resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('MAParticleRotationGenerate::getRotate_batch', [for (int __i__ = 0; __i__ < length; __i__++) {"__this__": this[__i__]}]);
+    final resultBatch = await kAmapMapFluttifyChannel.invokeMethod('MAParticleRotationGenerate::getRotate_batch', [for (int __i__ = 0; __i__ < this.length; __i__++) {"__this__": this[__i__]}]);
   
   
-    // convert native result to dart side object
-    if (resultBatch == null) {
-      return null;
-    } else {
-      final typedResult = (resultBatch as List).cast<double>().map((__result__) => __result__).toList();
-      return typedResult;
-    }
+    return (resultBatch as List).map((__result__) => __result__).cast<double?>().toList();
   }
   
   //endregion

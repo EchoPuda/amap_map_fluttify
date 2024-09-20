@@ -4,11 +4,11 @@
 Pod::Spec.new do |s|
   s.name             = 'amap_map_fluttify'
   s.version          = '0.0.1'
-  s.summary          = 'An `Amap` Map Component, Powered By `Fluttify` Compiler, A Dart Bindings Generator For Native SDK.'
+  s.summary          = 'An `Amap` Map Component, Powered By `Fluttify`, A Compiler Generating Dart Bindings For Native SDK.'
   s.description      = <<-DESC
 A new flutter plugin project.
                        DESC
-  s.homepage         = 'https://github.com/fluttify-project/amap_map_fluttify'
+  s.homepage         = 'https://github.com/fluttify-project'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'yohom' => 'yohombao@qq.com' }
   s.source           = { :path => '.' }
@@ -17,15 +17,12 @@ A new flutter plugin project.
   s.dependency 'Flutter'
   s.dependency 'foundation_fluttify'
   # flutter plugin dependency
-  s.dependency 'amap_core_fluttify'
-  s.dependency 'amap_location_fluttify'
-  s.dependency 'amap_search_fluttify'
-  s.dependency 'url_launcher'
+  
   # sdk dependency
-  s.dependency 'AMap3DMap-NO-IDFA', '7.6.0'
+  s.dependency 'AMap3DMap-NO-IDFA', '9.2.1'
 
   s.static_framework = true
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
   # include project framework
   s.vendored_frameworks = 'Vendors/*.framework'
   # include project .a

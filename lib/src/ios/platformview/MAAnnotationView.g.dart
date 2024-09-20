@@ -15,30 +15,33 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 typedef MAAnnotationViewCreatedCallback = void Function(MAAnnotationView controller);
 typedef _OnUiKitViewDispose = Future<void> Function();
 
-class MAAnnotationView_iOS extends StatefulWidget {
-  const MAAnnotationView_iOS({
-    Key key,
+class MAAnnotationView_UiKitView extends StatefulWidget {
+  const MAAnnotationView_UiKitView({
+    Key? key,
     this.onViewCreated,
     this.onDispose,
     this.params = const <String, dynamic>{},
     this.gestureRecognizers,
   }) : super(key: key);
 
-  final MAAnnotationViewCreatedCallback onViewCreated;
-  final _OnUiKitViewDispose onDispose;
+  final MAAnnotationViewCreatedCallback? onViewCreated;
+  final _OnUiKitViewDispose? onDispose;
   final Map<String, dynamic> params;
-  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+  final Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers;
 
   @override
-  _MAAnnotationView_iOSState createState() => _MAAnnotationView_iOSState();
+  _MAAnnotationView_UiKitViewState createState() => _MAAnnotationView_UiKitViewState();
 }
 
-class _MAAnnotationView_iOSState extends State<MAAnnotationView_iOS> {
-  MAAnnotationView _controller;
+class _MAAnnotationView_UiKitViewState extends State<MAAnnotationView_UiKitView> {
+  MAAnnotationView? _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +49,11 @@ class _MAAnnotationView_iOSState extends State<MAAnnotationView_iOS> {
       Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer()),
     };
 
-    final messageCodec = FluttifyMessageCodec('amap_map_fluttify');
     return UiKitView(
       viewType: 'me.yohom/MAAnnotationView',
       gestureRecognizers: gestureRecognizers,
       onPlatformViewCreated: _onViewCreated,
-      creationParamsCodec: messageCodec,
+      creationParamsCodec: kAmapMapFluttifyMessageCodec,
       creationParams: widget.params,
     );
   }
@@ -60,18 +62,18 @@ class _MAAnnotationView_iOSState extends State<MAAnnotationView_iOS> {
     // 碰到一个对象返回的hashCode为0的情况, 造成和这个id冲突了, 这里用一个magic number避免一下
     // 把viewId转换为refId再使用, 使其与其他对象统一
     final refId = await viewId2RefId((2147483647 - id).toString());
-    _controller = MAAnnotationView()..refId = refId;
+    _controller = MAAnnotationView()..refId = 'MAAnnotationView:$refId';
     if (widget.onViewCreated != null) {
-      widget.onViewCreated(_controller);
+      widget.onViewCreated!(_controller!);
     }
   }
 
   @override
   void dispose() {
     if (widget.onDispose != null) {
-      widget.onDispose().then((_) => _controller.release__());
+      widget.onDispose!().whenComplete(() => _controller?.release__());
     } else {
-      _controller.release__();
+      _controller?.release__();
     }
     super.dispose();
   }

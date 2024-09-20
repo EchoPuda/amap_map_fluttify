@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_SwipeDismissView extends android_widget_RelativeLayout  {
   //region constants
@@ -23,20 +26,25 @@ class com_amap_api_maps_SwipeDismissView extends android_widget_RelativeLayout  
   //endregion
 
   //region creators
-  static Future<com_amap_api_maps_SwipeDismissView> create__android_content_Context__android_view_View(android_content_Context var1, android_view_View var2) async {
-    final refId = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::createcom_amap_api_maps_SwipeDismissView__android_content_Context__android_view_View', {"var1": var1, "var2": var2});
-    final object = com_amap_api_maps_SwipeDismissView()..refId = refId;
-    return object;
+  static Future<com_amap_api_maps_SwipeDismissView> create__android_content_Context__android_view_View(android_content_Context? var1, android_view_View? var2) async {
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod(
+      'ObjectFactory::createcom_amap_api_maps_SwipeDismissView__android_content_Context__android_view_View',
+      {"var1": var1, "var2": var2}
+    );
+    return AmapMapFluttifyAndroidAs<com_amap_api_maps_SwipeDismissView>(__result__)!;
   }
   
-  static Future<List<com_amap_api_maps_SwipeDismissView>> create_batch__android_content_Context__android_view_View(List<android_content_Context> var1, List<android_view_View> var2) async {
-    if (var1.length != var2.length) {
-      return Future.error('all args must have same length!');
-    }
-    final List resultBatch = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('ObjectFactory::create_batchcom_amap_api_maps_SwipeDismissView__android_content_Context__android_view_View', [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__]}]);
-  
-    final List<com_amap_api_maps_SwipeDismissView> typedResult = resultBatch.map((result) => com_amap_api_maps_SwipeDismissView()..refId = result).toList();
-    return typedResult;
+  static Future<List<com_amap_api_maps_SwipeDismissView>> create_batch__android_content_Context__android_view_View(List<android_content_Context?> var1, List<android_view_View?> var2) async {
+    assert(var1.length == var2.length);
+    final __result_batch__ = await  kAmapMapFluttifyChannel.invokeListMethod(
+      'ObjectFactory::create_batchcom_amap_api_maps_SwipeDismissView__android_content_Context__android_view_View',
+      [for (int __i__ = 0; __i__ < var1.length; __i__++) {"var1": var1[__i__], "var2": var2[__i__]}]
+    );
+    return __result_batch__
+        ?.map((it) => AmapMapFluttifyAndroidAs<com_amap_api_maps_SwipeDismissView>(it))
+        .where((element) => element !=null)
+        .cast<com_amap_api_maps_SwipeDismissView>()
+        .toList() ?? <com_amap_api_maps_SwipeDismissView>[];
   }
   
   //endregion
@@ -51,56 +59,20 @@ class com_amap_api_maps_SwipeDismissView extends android_widget_RelativeLayout  
 
   //region methods
   
-  Future<void> setCallback(com_amap_api_maps_WearMapView_OnDismissCallback var1) async {
+  Future<void> setCallback(com_amap_api_maps_WearMapView_OnDismissCallback? var1) async {
     // print log
     if (fluttifyLogEnabled) {
       debugPrint('fluttify-dart: com.amap.api.maps.SwipeDismissView@$refId::setCallback([])');
     }
   
     // invoke native method
-    final __result__ = await MethodChannel('me.yohom/amap_map_fluttify', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify'))).invokeMethod('com.amap.api.maps.SwipeDismissView::setCallback', {"__this__": this});
+    final __result__ = await kAmapMapFluttifyChannel.invokeMethod('com.amap.api.maps.SwipeDismissView::setCallback', {"var1": var1, "__this__": this});
   
   
     // handle native call
-    MethodChannel('com.amap.api.maps.SwipeDismissView::setCallback::Callback@$refId', StandardMethodCodec(FluttifyMessageCodec('amap_map_fluttify')))
-        .setMethodCallHandler((methodCall) async {
-          try {
-            final args = methodCall.arguments as Map;
-            switch (methodCall.method) {
-              case 'Callback::com.amap.api.maps.WearMapView.OnDismissCallback::onDismiss':
-                // print log
-                if (fluttifyLogEnabled) {
-                  debugPrint('fluttify-dart-callback: onDismiss([])');
-                }
-          
-                // handle the native call
-                var1?.onDismiss();
-                break;
-              case 'Callback::com.amap.api.maps.WearMapView.OnDismissCallback::onNotifySwipe':
-                // print log
-                if (fluttifyLogEnabled) {
-                  debugPrint('fluttify-dart-callback: onNotifySwipe([])');
-                }
-          
-                // handle the native call
-                var1?.onNotifySwipe();
-                break;
-              default:
-                break;
-            }
-          } catch (e) {
-            debugPrint(e);
-            throw e;
-          }
-        });
   
-    // convert native result to dart side object
-    if (__result__ == null) {
-      return null;
-    } else {
-      final __return__ = __result__;
-      return __return__;
-    }
+  
+    return __result__;
   }
   
   //endregion
@@ -111,7 +83,12 @@ class com_amap_api_maps_SwipeDismissView extends android_widget_RelativeLayout  
   }
 }
 
-extension com_amap_api_maps_SwipeDismissView_Batch on List<com_amap_api_maps_SwipeDismissView> {
+extension com_amap_api_maps_SwipeDismissView_Batch on List<com_amap_api_maps_SwipeDismissView?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion

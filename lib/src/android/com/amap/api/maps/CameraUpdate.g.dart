@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 
 import 'package:foundation_fluttify/foundation_fluttify.dart';
 import 'package:core_location_fluttify/core_location_fluttify.dart';
+import 'package:amap_core_fluttify/amap_core_fluttify.dart';
+import 'package:amap_search_fluttify/amap_search_fluttify.dart';
+import 'package:amap_location_fluttify/amap_location_fluttify.dart';
 
 class com_amap_api_maps_CameraUpdate extends java_lang_Object  {
   //region constants
@@ -44,7 +47,12 @@ class com_amap_api_maps_CameraUpdate extends java_lang_Object  {
   }
 }
 
-extension com_amap_api_maps_CameraUpdate_Batch on List<com_amap_api_maps_CameraUpdate> {
+extension com_amap_api_maps_CameraUpdate_Batch on List<com_amap_api_maps_CameraUpdate?> {
+  String? get refId {
+    if (isEmpty) return null;
+    return first?.refId;
+  }
+
   //region getters
   
   //endregion
